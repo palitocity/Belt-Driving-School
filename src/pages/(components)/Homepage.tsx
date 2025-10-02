@@ -2,7 +2,7 @@ import React from "react";
 import Homelayouts from "../layouts/Homelayouts";
 import Head from "next/head";
 import Hero from "./Hero";
-// import FAQ from "./Faq";
+ import FAQ from "./Faq";
 import PlanCard from "./PlanCard";
 import FindUs from "./Locateus";
 import Certificates from "./OurCertificate";
