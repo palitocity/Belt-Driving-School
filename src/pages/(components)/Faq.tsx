@@ -1,4 +1,4 @@
- "use client";
+"use client";
 import React, { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
@@ -35,7 +35,8 @@ const faqs = [
   },
   {
     question: "Can you help me renew my driver’s license if it is expired?",
-    answer: "Yes. We handle license renewals efficiently, even if your license has already expired.",
+    answer:
+      "Yes. We handle license renewals efficiently, even if your license has already expired.",
   },
   {
     question: "What documents do I need to apply for a learner’s permit?",
@@ -59,7 +60,8 @@ const faqs = [
   },
   {
     question: "Do you assist with new plate number registration?",
-    answer: "Yes. We handle new plate registrations to ensure your vehicle is properly documented.",
+    answer:
+      "Yes. We handle new plate registrations to ensure your vehicle is properly documented.",
   },
   {
     question: "What do I need to bring for a change of ownership?",
@@ -83,7 +85,8 @@ const faqs = [
   },
   {
     question: "Do you offer installment payment options for lessons?",
-    answer: "Yes. We provide flexible payment options to make training more convenient.",
+    answer:
+      "Yes. We provide flexible payment options to make training more convenient.",
   },
   {
     question: "Where are you located, and how can I contact you?",
@@ -105,7 +108,8 @@ const faqs = [
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
-  const toggleFAQ = (index) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const toggleFAQ = (index: any) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 

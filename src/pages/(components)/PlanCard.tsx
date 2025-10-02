@@ -2,13 +2,13 @@ import React from "react";
 import { Check } from "lucide-react"; // optional: for check icons
 
 interface Props {
-  title: any; 
-  price: any;
+  title: string;
+  price: string | number;
   description: string;
-  features: [];
+  features: string[];
 }
 
-const PlanCard = ({ title, price, description, features }) => {
+const PlanCard: React.FC<Props> = ({ title, price, description, features }) => {
   return (
     <div className="max-w-sm mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
       {/* Top Section with Gradient */}
@@ -26,21 +26,28 @@ const PlanCard = ({ title, price, description, features }) => {
         </button>
       </div>
 
-
       <hr className="border-gray-200 my-4" />
-
 
       <div className="px-6 pb-6">
         <h3 className="text-sm font-semibold text-gray-800 mb-3">
           Free, forever
         </h3>
         <ul className="space-y-2">
-          {features.map((feature, idx) => (
-            <li key={idx} className="flex items-center text-sm text-gray-700">
-              <Check className="w-4 h-4 text-green-500 mr-2" />
-              {feature}
-            </li>
-          ))}
+          {Array.isArray(features) && features.length > 0 ? (
+            <ul className="space-y-2">
+              {features.map((feature, idx) => (
+                <li
+                  key={idx}
+                  className="flex items-center text-sm text-gray-700"
+                >
+                  <Check className="w-4 h-4 text-green-500 mr-2" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-gray-400">No features listed</p>
+          )}
         </ul>
       </div>
     </div>

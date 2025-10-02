@@ -35,10 +35,10 @@ const Testimonials = () => {
               key={index}
               className="bg-white shadow-md rounded-xl p-6 hover:shadow-lg transition"
             >
-              <p className="text-gray-700 italic mb-4">"{testimony.message}"</p>
-              <h4 className="font-semibold text-blue-800">
-                {testimony.name}
-              </h4>
+              <p className="text-gray-700 italic mb-4">
+                &ldquo;{testimony.message}&ldquo;
+              </p>
+              <h4 className="font-semibold text-blue-800">{testimony.name}</h4>
               <p className="text-sm text-gray-500">{testimony.location}</p>
             </div>
           ))}
