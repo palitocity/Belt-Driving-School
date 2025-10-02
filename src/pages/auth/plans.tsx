@@ -7,7 +7,6 @@ const PlanProcessingForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert(`Proceeding to payment for ${plan}`);
-    // In real-world: redirect to payment gateway
   };
 
   return (
