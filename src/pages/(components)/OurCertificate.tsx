@@ -11,8 +11,8 @@ const Certificates = () => {
         <p className="text-gray-600 mb-10">
           At Belt Driving School, every successful student receives a
           certificate of completion, proving competence and readiness for the
-          road. In addition, we guide you through processing your driver's
-          license to make sure you're fully road-legal.
+          road. In addition, we guide you through processing your driver&lsquo;s
+          license to make sure you&lsquo;re fully road-legal.
         </p>
 
         <div className="grid gap-8 md:grid-cols-2">
@@ -32,10 +32,10 @@ const Certificates = () => {
             <CheckCircleIcon className="h-10 w-10 text-green-600" />
             <div className="text-left">
               <h4 className="font-semibold text-gray-800">
-                Driver's License Support
+                Driver&lsquo;s License Support
               </h4>
               <p className="text-sm text-gray-600">
-                We assist in processing your driver's license quickly and
+                We assist in processing your driver&apos;s license quickly and
                 hassle-free.
               </p>
             </div>

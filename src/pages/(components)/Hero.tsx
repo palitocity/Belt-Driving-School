@@ -45,7 +45,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className="relative w-full h-[120vh] mt-[90px]">
+    <section className="relative w-full md:h-[110vh] h-[160vh]  mt-[90px]">
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
