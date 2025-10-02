@@ -21,7 +21,7 @@ const WhyChooseUs = () => {
         <ul className="grid md:grid-cols-2 gap-6">
           {reasons.map((reason, index) => (
             <li key={index} className="flex items-start space-x-3 bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition">
-              <CheckCircleIcon className="h-6 w-6 text-yellow-500 flex-shrink-0" />
+              <CheckCircleIcon className="h-6 w-6 text-[#E02828] text-[500] flex-shrink-0" />
               <p className="text-gray-700">{reason}</p>
             </li>
           ))}
