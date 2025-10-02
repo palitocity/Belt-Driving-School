@@ -39,6 +39,9 @@ const Homepage = () => {
         <Certificates />
       </section>
       <section>
+        <FAQ />
+      </section>
+      <section>
         <Testimonials />
       </section>
     </Homelayouts>
