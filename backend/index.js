@@ -15,14 +15,20 @@ const adminDashboardRoutes = require('./routes/adminDashboard');
 const accidentRoutes = require('./routes/accident');
 const adminAccidentRoutes = require('./routes/adminAccidents');
 const helmet = require("helmet");
-const cors = require("cors");
 const rateLimit = require("express-rate-limit");
+// Middleware
+app.use(cors());
+app.use(express.json());
 
 // Security headers
 app.use(helmet());
 
 // CORS
 app.use(cors({ origin: "*" }));
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/plan', planRoutes);
 
 // Rate limit for sensitive routes
 const limiter = rateLimit({
@@ -31,7 +37,7 @@ const limiter = rateLimit({
 });
 app.use("/api/auth", limiter);
 
-// Catch-all for unknown routes
+// // Catch-all for unknown routes
 app.use((req, res, next) => {
   res.status(404).json({ error: "Route not found" });
 });
@@ -43,19 +49,14 @@ app.use((err, req, res, next) => {
 });
 
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+
 
 app.use('/api/admin/auth', adminAuthRoutes);
 app.use('/api/admin/dashboard', adminDashboardRoutes);
 app.use('/api/accidents', accidentRoutes);          // User accident reporting
 app.use('/api/admin/accidents', adminAccidentRoutes); // Admin accident dashboard
 
-// Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/user', userRoutes);
-app.use('/api/plan', planRoutes);
+
 
 app.get('/', (req, res) => res.json({ ok: true, message: 'Belt Driving Backend with MongoDB is running' }));
 
