@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   Award,
   X,
+  Book,
 } from "lucide-react";
 
 interface Props {
@@ -20,18 +21,43 @@ const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
     {
       name: "Dashboard",
       icon: <LayoutDashboard className="w-5 h-5" />,
-      href: "#",
+      path: "/admin/main",
     },
-    { name: "Students", icon: <Users className="w-5 h-5" />, href: "#" },
-    { name: "Instructors", icon: <Award className="w-5 h-5" />, href: "#" },
-    { name: "Training Programs", icon: <Car className="w-5 h-5" />, href: "#" },
+    {
+      name: "Students",
+      icon: <Users className="w-5 h-5" />,
+      path: "/admin/student",
+    },
+    {
+      name: "Instructors",
+      icon: <Award className="w-5 h-5" />,
+      path: "/admin/instructors",
+    },
+    {
+      name: "Training Programs",
+      icon: <Car className="w-5 h-5" />,
+      path: "/admin/trainingprograms",
+    },
     {
       name: "Driver’s License",
       icon: <FileBadge className="w-5 h-5" />,
-      href: "#",
+      path: "/admin/driverlicense",
     },
-    { name: "Payments", icon: <CreditCard className="w-5 h-5" />, href: "#" },
-    { name: "Settings", icon: <Settings className="w-5 h-5" />, href: "#" },
+    {
+      name: "Plans",
+      icon: <Book className="w-5 h-5" />,
+      path: "/admin/plans",
+    },
+    {
+      name: "Payments",
+      icon: <CreditCard className="w-5 h-5" />,
+      path: "/admin/payments",
+    },
+    {
+      name: "Settings",
+      icon: <Settings className="w-5 h-5" />,
+      path: "/admin/settings",
+    },
   ];
 
   return (
@@ -55,7 +81,7 @@ const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
           {menuItems.map((item, idx) => (
             <a
               key={idx}
-              href={item.href}
+              href={item.path}
               className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#E02828] transition"
             >
               {item.icon}
@@ -71,7 +97,7 @@ const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
           {menuItems.map((item, idx) => (
             <a
               key={idx}
-              href={item.href}
+              href={item.path}
               className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#E02828] transition"
             >
               {item.icon}
