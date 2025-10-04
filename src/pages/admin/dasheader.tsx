@@ -3,10 +3,9 @@ import Image from "next/image";
 import React, { useState } from "react";
 import logo from "../../../assets/logo-removebg-preview.png";
 import { ChevronDown, LogOut, Search, Settings, User } from "lucide-react";
-import { IoMdNotificationsOutline } from "react-icons/io";
+
 import userprofilepic from "../../../assets/blank-profile-picture.webp";
 import { MdMenu } from "react-icons/md";
-import { useRouter } from "next/router";
 
 interface Props {
   setSidebarOpen: (open: boolean) => void;
@@ -15,7 +14,6 @@ interface Props {
 
 const DashboardHeader: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
   const [dropdown, setDropdown] = useState(false);
-  const router = useRouter();
 
   return (
     <header className="w-full h-full flex items-center justify-between px-4 md:px-6 bg-white">
@@ -39,17 +37,6 @@ const DashboardHeader: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
 
       {/* Right Side */}
       <div className="flex items-center gap-4">
-        {/* Notification */}
-        <button
-          onClick={() => router.push("/dashboard/notifications")}
-          className="relative"
-        >
-          <IoMdNotificationsOutline size={24} className="text-gray-700" />
-          <span className="absolute -top-1 -right-1 bg-[#E02828] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-            3
-          </span>
-        </button>
-
         {/* Profile Dropdown */}
         <div className="relative">
           <button
