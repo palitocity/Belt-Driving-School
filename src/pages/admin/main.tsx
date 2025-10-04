@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Adminlayouts from "../layouts/Adminlayouts";
 import Head from "next/head";
 import {
@@ -10,8 +10,40 @@ import {
   Bell,
   TrendingUp,
 } from "lucide-react";
+import axios from "axios";
+
+type Stats = {
+  totalStudents?: number;
+  totalInstructors?: number;
+  paidOrders?: number;
+  totalOrders?: number;
+  // Add other properties as needed
+};
 
 const Main = () => {
+  const [stats, setStats] = useState<Stats>({});
+
+  const getStats = async () => {
+    try {
+      const response = await axios.get(
+        "https://belt-driving-school-backend-3.onrender.com/api/admin/dashboard/stats",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setStats(response.data);
+      console.log("Dashboard stats:", response.data);
+    } catch (error) {
+      console.error("Error fetching dashboard stats:", error);
+    }
+  };
+
+  useEffect(() => {
+    getStats();
+  }, []);
+
   return (
     <Adminlayouts>
       <Head>
@@ -25,7 +57,7 @@ const Main = () => {
             <Users className="w-10 h-10 text-[#0A2E57]" />
             <div>
               <h3 className="text-sm text-gray-500">Total Students</h3>
-              <p className="text-xl font-bold">120</p>
+              <p className="text-xl font-bold">{stats.totalStudents || 0}</p>
             </div>
           </div>
 
@@ -33,23 +65,23 @@ const Main = () => {
             <Award className="w-10 h-10 text-[#0A2E57]" />
             <div>
               <h3 className="text-sm text-gray-500">Instructors</h3>
-              <p className="text-xl font-bold">8</p>
+              <p className="text-xl font-bold">{stats.totalInstructors || 0}</p>
             </div>
           </div>
 
           <div className="bg-white rounded-xl shadow p-5 flex items-center gap-4">
             <Car className="w-10 h-10 text-[#0A2E57]" />
             <div>
-              <h3 className="text-sm text-gray-500">Active Programs</h3>
-              <p className="text-xl font-bold">6</p>
+              <h3 className="text-sm text-gray-500">Total Order</h3>
+              <p className="text-xl font-bold">{stats.totalOrders || 0}</p>
             </div>
           </div>
 
           <div className="bg-white rounded-xl shadow p-5 flex items-center gap-4">
             <CreditCard className="w-10 h-10 text-[#0A2E57]" />
             <div>
-              <h3 className="text-sm text-gray-500">Monthly Revenue</h3>
-              <p className="text-xl font-bold">₦850,000</p>
+              <h3 className="text-sm text-gray-500">Paid Orders</h3>
+              <p className="text-xl font-bold">₦{stats.paidOrders || 0}</p>
             </div>
           </div>
         </div>

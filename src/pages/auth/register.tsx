@@ -53,6 +53,9 @@ const RegistrationForm = () => {
       );
 
       toast.success(res.data.message || "Registration successful!");
+      router.push("/auth/verifyemail");
+
+      localStorage.setItem("token", res.data.token);
 
       // reset form
       setFormData({
