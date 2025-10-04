@@ -4,25 +4,25 @@ const teamMembers = [
   {
     name: "Mr. Adewale Johnson",
     role: "Founder & Chief Instructor",
-    image: "/images/team1.jpg",
+    image: "",
     bio: "Over 10 years of professional driving experience and safety instruction.",
   },
   {
     name: "Mrs. Sarah Oladipo",
     role: "Student Coordinator",
-    image: "/images/team2.jpg",
+    image: "",
     bio: "Dedicated to ensuring every student has a smooth and rewarding learning experience.",
   },
   {
     name: "Mr. Tunde Balogun",
     role: "Technical Instructor",
-    image: "/images/team3.jpg",
+    image: "",
     bio: "Expert in both manual and automatic driving training with advanced road safety certification.",
   },
   {
     name: "Miss Anita Bello",
     role: "Customer Support Manager",
-    image: "/images/team4.jpg",
+    image: "",
     bio: "Focused on delivering the best support and guidance to all our students and partners.",
   },
 ];
