@@ -88,7 +88,7 @@ const RegistrationForm = () => {
       </Head>
 
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#0A2E57] via-[#002147] to-[#0A2E57] px-4">
-        <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8 border border-gray-200">
+        <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8 border border-gray-200 my-12">
           <h2 className="text-3xl font-extrabold text-[#0A2E57] mb-2 text-center">
             Create Account
           </h2>
