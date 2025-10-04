@@ -8,6 +8,7 @@ import FindUs from "./Locateus";
 import Certificates from "./OurCertificate";
 import Testimonials from "./Testomony";
 import WhyChooseUs from "./WhyChooseUs";
+import PlanSection from "./planSelection";
 
 const Homepage = () => {
   return (
@@ -22,7 +23,7 @@ const Homepage = () => {
         <WhyChooseUs />
       </section>
       <section>
-        <PlanCard title="Plan" price="1000" description="test" features={[]} />
+        <PlanSection />
       </section>
       <section>
         <FindUs />
