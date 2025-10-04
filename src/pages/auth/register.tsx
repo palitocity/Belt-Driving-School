@@ -4,6 +4,7 @@ import Head from "next/head";
 import axios, { isAxiosError } from "axios";
 
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -30,18 +31,16 @@ const RegistrationForm = () => {
   // handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage("");
     setLoading(true);
 
     // basic validation
     if (formData.password !== formData.confirmPassword) {
-      setMessage("Passwords do not match.");
+      toast.error("Passwords do not match.");
       setLoading(false);
       return;
     }
 
     try {
-      // example endpoint — update with your actual API URL
       const res = await axios.post(
         "https://belt-driving-school-backend-3.onrender.com/api/auth/register",
         {
@@ -53,7 +52,9 @@ const RegistrationForm = () => {
         }
       );
 
-      setMessage(res.data.message || "Registration successful!");
+      toast.success(res.data.message || "Registration successful!");
+
+      // reset form
       setFormData({
         fullname: "",
         email: "",
@@ -72,6 +73,7 @@ const RegistrationForm = () => {
           `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
           fallback;
 
+        toast.error(errorMsg);
         setMessage(errorMsg);
       }
     } finally {
@@ -86,7 +88,7 @@ const RegistrationForm = () => {
       </Head>
 
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#0A2E57] via-[#002147] to-[#0A2E57] px-4">
-        <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8 border border-gray-200">
+        <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8 border border-gray-200 my-12">
           <h2 className="text-3xl font-extrabold text-[#0A2E57] mb-2 text-center">
             Create Account
           </h2>
