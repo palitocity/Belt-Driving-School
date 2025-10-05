@@ -40,26 +40,31 @@ const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
       icon: <Award className="w-5 h-5" />,
       path: "/admin/instructors",
     },
-    {
-      name: "Training Programs",
-      icon: <Car className="w-5 h-5" />,
-      path: "/admin/trainingprograms",
-    },
+    // {
+    //   name: "Training Programs",
+    //   icon: <Car className="w-5 h-5" />,
+    //   path: "/admin/trainingprograms",
+    // },
     {
       name: "Accidents",
       icon: <Ambulance className="w-5 h-5" />,
       path: "/admin/accidents",
     },
-    {
-      name: "Driver’s License",
-      icon: <FileBadge className="w-5 h-5" />,
-      path: "/admin/driverlicense",
-    },
+    // {
+    //   name: "Driver’s License",
+    //   icon: <FileBadge className="w-5 h-5" />,
+    //   path: "/admin/driverlicense",
+    // },
     { name: "Plans", icon: <Book className="w-5 h-5" />, path: "/admin/plans" },
     {
       name: "Payments",
       icon: <CreditCard className="w-5 h-5" />,
       path: "/admin/payments",
+    },
+    {
+      name: "Team",
+      icon: <Users className="w-5 h-5" />,
+      path: "/admin/team",
     },
     {
       name: "Settings",

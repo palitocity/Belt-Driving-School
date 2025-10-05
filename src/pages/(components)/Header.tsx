@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../../assets/logo.jpg";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -85,7 +88,10 @@ const Header = () => {
           >
             +234 800 123 4567
           </a>
-          <button className="bg-[#E02828] text-white font-bold px-4 py-2 text-sm rounded-md hover:bg-[#C02020] transition shadow">
+          <button
+            onClick={() => router.push("/auth/register")}
+            className="bg-[#E02828] text-white font-bold px-4 py-2 text-sm rounded-md hover:bg-[#C02020] transition shadow"
+          >
             Enroll Now
           </button>
         </div>
@@ -160,7 +166,10 @@ const Header = () => {
               >
                 📞 +234 800 123 4567
               </a>
-              <button className="w-full bg-[#E02828] text-white font-bold py-2 rounded-md">
+              <button
+                onClick={() => router.push("/auth/register")}
+                className="w-full bg-[#E02828] text-white font-bold py-2 rounded-md"
+              >
                 Enroll Now
               </button>
             </div>
