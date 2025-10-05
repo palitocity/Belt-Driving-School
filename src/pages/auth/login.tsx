@@ -4,6 +4,21 @@ import Head from "next/head";
 import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { ArrowLeft } from "lucide-react";
+
+const GoBackNav = ({ label = "Back" }: { label?: string }) => {
+  const router = useRouter();
+
+  return (
+    <div
+      onClick={() => router.back()}
+      className="flex items-center gap-2 cursor-pointer mb-6 text-[#0A2E57] hover:text-[#E02828] transition font-medium"
+    >
+      <ArrowLeft size={18} />
+      <span>{label}</span>
+    </div>
+  );
+};
 
 const LoginForm = () => {
   const router = useRouter();
@@ -68,6 +83,7 @@ const LoginForm = () => {
 
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#0A2E57] via-[#002147] to-[#0A2E57] px-4">
         <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8 border border-gray-200">
+          <GoBackNav label="Go Back" />
           <h2 className="text-3xl font-extrabold text-[#0A2E57] mb-2 text-center">
             Welcome Back
           </h2>
