@@ -11,13 +11,20 @@ import {
   TrendingUp,
 } from "lucide-react";
 import axios from "axios";
+import InstructorLayouts from "../layouts/Instructorlayout";
 
 type Stats = {
   totalStudents?: number;
   totalInstructors?: number;
   paidOrders?: number;
   totalOrders?: number;
-  // Add other properties as needed
+  totalEarnings?: number;
+  recentStudents?: {
+    fullName: string;
+    email: string;
+    courseLevel: string;
+    progress: number;
+  }[];
 };
 
 const Main = () => {
@@ -26,7 +33,7 @@ const Main = () => {
   const getStats = async () => {
     try {
       const response = await axios.get(
-        "https://belt-driving-school-backend-3.onrender.com/api/Instructor/dashboard/stats",
+        "https://belt-driving-school.vercel.app/api/instructor/dashboard",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -45,71 +52,131 @@ const Main = () => {
   }, []);
 
   return (
-    <Instructorlayouts>
+    <InstructorLayouts>
       <Head>
         <title>Instructor Dashboard</title>
       </Head>
 
       <div className="space-y-6">
         {/* KPI CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="bg-white rounded-xl shadow p-5 flex items-center gap-4">
-            <Users className="w-10 h-10 text-[#0A2E57]" />
-            <div>
-              <h3 className="text-sm text-gray-500">Total Students</h3>
-              <p className="text-xl font-bold">{stats.totalStudents || 0}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition-all duration-300">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-gray-500 text-sm">Total Students</p>
+                <h3 className="text-2xl font-semibold">{stats.totalStudents || 0}</h3>
+              </div>
+              <Users className="text-blue-500 w-8 h-8" />
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition-all duration-300">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-gray-500 text-sm">Courses Assigned</p>
+                <h3 className="text-2xl font-semibold">{stats.totalOrders || 0}</h3>
+              </div>
+              <Car className="text-green-500 w-8 h-8" />
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition-all duration-300">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-gray-500 text-sm">Paid Orders</p>
+                <h3 className="text-2xl font-semibold">{stats.paidOrders || 0}</h3>
+              </div>
+              <CreditCard className="text-purple-500 w-8 h-8" />
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition-all duration-300">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-gray-500 text-sm">Total Earnings</p>
+                <h3 className="text-2xl font-semibold">
+                  ₦{stats.totalEarnings || 0}
+                </h3>
+              </div>
+              <TrendingUp className="text-yellow-500 w-8 h-8" />
             </div>
           </div>
         </div>
 
-        {/* MIDDLE ROW: SCHEDULE + REVENUE */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Schedule */}
-          <div className="bg-white rounded-xl shadow p-5">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2">
-                <Calendar className="w-5 h-5" /> Upcoming Lessons
-              </h2>
-              <button className="text-sm text-[#0A2E57] hover:underline">
-                View All
-              </button>
-            </div>
-            <ul className="space-y-3 text-sm text-gray-600">
-              <li className="flex justify-between">
-                <span>John Doe - Basic Driving</span>
-                <span className="text-gray-400">10:00 AM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Jane Smith - Highway Training</span>
-                <span className="text-gray-400">1:30 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Michael Lee - License Prep</span>
-                <span className="text-gray-400">4:00 PM</span>
-              </li>
-            </ul>
+        {/* RECENT STUDENTS */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow">
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Award className="w-5 h-5 text-indigo-500" />
+            Recent Students
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full table-auto border-collapse">
+              <thead>
+                <tr className="text-left text-gray-600 dark:text-gray-300 text-sm">
+                  <th className="p-3">Name</th>
+                  <th className="p-3">Email</th>
+                  <th className="p-3">Course Level</th>
+                  <th className="p-3">Progress</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stats.recentStudents && stats.recentStudents.length > 0 ? (
+                  stats.recentStudents.map((student, index) => (
+                    <tr
+                      key={index}
+                      className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
+                    >
+                      <td className="p-3">{student.fullName}</td>
+                      <td className="p-3">{student.email}</td>
+                      <td className="p-3">{student.courseLevel}</td>
+                      <td className="p-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                          <div
+                            className="bg-blue-600 h-2.5 rounded-full"
+                            style={{ width: `${student.progress}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs text-gray-500 ml-2">
+                          {student.progress}%
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={4} className="text-center text-gray-400 p-4">
+                      No students assigned yet.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
 
-          {/* Notifications */}
-          <div className="bg-white rounded-xl shadow p-5">
-            <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2 mb-4">
-              <Bell className="w-5 h-5" /> Notifications
-            </h2>
-            <ul className="space-y-3 text-sm text-gray-600">
-              <li className="p-2 bg-yellow-50 border-l-4 border-yellow-400 rounded">
-                ⚠ Student <b>Mike</b> missed yesterday’s class.
-              </li>
-              <li className="p-2 bg-red-50 border-l-4 border-red-400 rounded">
-                ❌ Payment overdue from <b>Anna</b>.
-              </li>
-              <li className="p-2 bg-blue-50 border-l-4 border-blue-400 rounded">
-                📅 License test scheduled for <b>Friday</b>.
-              </li>
-            </ul>
-          </div>
+        {/* ACTIVITY / NOTIFICATIONS */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow">
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Bell className="w-5 h-5 text-red-500" />
+            Recent Activities
+          </h2>
+          <ul className="space-y-3">
+            <li className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
+              <Calendar className="w-4 h-4 text-blue-500" />
+              <span>New student enrolled in your Beginner course.</span>
+            </li>
+            <li className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
+              <Award className="w-4 h-4 text-yellow-500" />
+              <span>John Doe completed 80% of his Intermediate training.</span>
+            </li>
+            <li className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
+              <TrendingUp className="w-4 h-4 text-green-500" />
+              <span>Your class attendance rate increased by 15% this week.</span>
+            </li>
+          </ul>
         </div>
-    </Instructorlayouts>
+      </div>
+    </InstructorLayouts>
   );
 };
 
