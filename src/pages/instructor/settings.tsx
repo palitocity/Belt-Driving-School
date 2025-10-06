@@ -32,8 +32,8 @@ const Settings = () => {
 
   useEffect(() => {
     // ✅ Access localStorage safely here
-    const storedId = localStorage.getItem("instructorId");
-    setInstructorId(storedId);
+    const storedId = localStorage.getItem("user");
+    setInstructorId(storedId ? JSON.parse(storedId).id : null);
   }, []);
 
   useEffect(() => {
