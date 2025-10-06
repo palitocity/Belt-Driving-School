@@ -50,12 +50,24 @@ const LoginForm = () => {
       );
 
       if (res.status === 200) {
-        localStorage.setItem("token", res.data.token);
+        const { token, user } = res.data;
+
+        // Save token and user info
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
 
         toast.success("Login successful 🎉");
 
+        // Role-based routing
         setTimeout(() => {
-          router.push("/admin/main");
+          if (user.role === "admin") {
+            router.push("/admin/main");
+          } else if (user.role === "instructor") {
+            router.push("/instructor/main");
+          } else {
+            // Default to student route
+            router.push("/student/main");
+          }
         }, 1000);
       }
     } catch (error) {
@@ -157,7 +169,7 @@ const LoginForm = () => {
             Don’t have an account?{" "}
             <span
               onClick={() => router.push("/auth/register")}
-              className="text-[#0A2E57] font-semibold hover:text-[#E02828] transition"
+              className="text-[#0A2E57] font-semibold hover:text-[#E02828] transition cursor-pointer"
             >
               Sign Up
             </span>
