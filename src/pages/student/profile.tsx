@@ -1,22 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios, { isAxiosError } from "axios";
 import StudentLayouts from "../layouts/Studentlayout";
+import { toast } from "react-hot-toast";
 
 const Profile = () => {
   const [formData, setFormData] = useState({
-    fullName: "John Doe",
-    email: "johndoe@gmail.com",
-    phone: "09012345678",
+    fullName: "",
+    email: "",
+    phone: "",
     password: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const getProfile = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await axios.put(
+        "https://belt-driving-school-backend-3.onrender.com/api/user/activity/update-profile",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setFormData(res.data);
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const apiMessage = error.response?.data?.message;
+        const apiError = error.response?.data?.error;
+        const fallback = error.message || "An unexpected error occurred";
+
+        const errorMsg =
+          `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
+          fallback;
+
+        toast.error(errorMsg);
+      }
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Profile updated successfully!");
+    try {
+      const token = localStorage.getItem("token");
+      await axios.put(
+        "https://belt-driving-school.vercel.app/api/user/activity/update-profile",
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const apiMessage = error.response?.data?.message;
+        const apiError = error.response?.data?.error;
+        const fallback = error.message || "An unexpected error occurred";
+
+        const errorMsg =
+          `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
+          fallback;
+
+        toast.error(errorMsg);
+      }
+    }
   };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   return (
     <StudentLayouts>
@@ -35,10 +84,11 @@ const Profile = () => {
             </label>
             <input
               name="fullName"
-              type="text"
               value={formData.fullName}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#E02828] outline-none"
+              onChange={(e) =>
+                setFormData({ ...formData, fullName: e.target.value })
+              }
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#E02828]"
             />
           </div>
 
@@ -50,8 +100,10 @@ const Profile = () => {
               name="email"
               type="email"
               value={formData.email}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#E02828] outline-none"
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#E02828]"
             />
           </div>
 
@@ -63,8 +115,10 @@ const Profile = () => {
               name="phone"
               type="text"
               value={formData.phone}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#E02828] outline-none"
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#E02828]"
             />
           </div>
 
@@ -76,9 +130,11 @@ const Profile = () => {
               name="password"
               type="password"
               value={formData.password}
-              onChange={handleChange}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
               placeholder="Leave blank to keep current"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#E02828] outline-none"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#E02828]"
             />
           </div>
 

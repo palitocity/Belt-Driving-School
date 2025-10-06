@@ -1,16 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Users,
-  CreditCard,
-  Settings,
-  LayoutDashboard,
-  Award,
-  X,
-  Book,
-  Ambulance,
-  LogOut,
-} from "lucide-react";
+import { Users, Settings, LayoutDashboard, X, LogOut } from "lucide-react";
 import { useRouter } from "next/router";
 
 interface Props {

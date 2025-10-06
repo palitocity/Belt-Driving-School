@@ -6,6 +6,7 @@ import { Car, User, CalendarDays, PhoneCall, Loader2 } from "lucide-react";
 
 import toast from "react-hot-toast";
 import StudentLayouts from "../layouts/Studentlayout";
+import { isAxiosError } from "axios";
 
 const ActivePlan = () => {
   const [activePlan, setActivePlan] = useState<any>(null);
@@ -34,7 +35,17 @@ const ActivePlan = () => {
           nextLesson: "2025-10-08",
         });
       } catch (error) {
-        toast.error("Failed to load active plan");
+        if (isAxiosError(error)) {
+          const apiMessage = error.response?.data?.message;
+          const apiError = error.response?.data?.error;
+          const fallback = error.message || "An unexpected error occurred";
+
+          const errorMsg =
+            `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
+            fallback;
+
+          toast.error(errorMsg);
+        }
       } finally {
         setLoading(false);
       }

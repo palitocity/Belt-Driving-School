@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { CheckCircle } from "lucide-react";
 import Head from "next/head";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import toast from "react-hot-toast";
 import StudentLayouts from "../layouts/Studentlayout";
 
@@ -56,7 +56,17 @@ const AllPlans = () => {
       );
       toast.success("Plan activated successfully!");
     } catch (error) {
-      toast.error("Failed to activate plan.");
+      if (isAxiosError(error)) {
+        const apiMessage = error.response?.data?.message;
+        const apiError = error.response?.data?.error;
+        const fallback = error.message || "An unexpected error occurred";
+
+        const errorMsg =
+          `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
+          fallback;
+
+        toast.error(errorMsg);
+      }
     } finally {
       setLoadingPlanId(null);
     }

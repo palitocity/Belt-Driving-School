@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import {
   LayoutDashboard,
-  BarChart3,
-  User,
   LogOut,
   X,
   CreditCard,
@@ -45,7 +43,7 @@ const StudentSidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
     {
       name: "Update Profile",
       icon: <Settings className="w-5 h-5" />,
-      path: "/student/update-profile",
+      path: "/student/profile",
     },
   ];
 
