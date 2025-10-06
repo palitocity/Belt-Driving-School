@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import Instructorlayouts from "../layouts/Instructorlayout";
 import Head from "next/head";
 import {
   Users,
@@ -64,9 +64,7 @@ const Main = () => {
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-gray-500 text-sm">Total Students</p>
-                <h3 className="text-2xl font-semibold">
-                  {stats.totalStudents || 0}
-                </h3>
+                <h3 className="text-2xl font-semibold">{stats.totalStudents || 0}</h3>
               </div>
               <Users className="text-blue-500 w-8 h-8" />
             </div>
@@ -76,9 +74,7 @@ const Main = () => {
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-gray-500 text-sm">Courses Assigned</p>
-                <h3 className="text-2xl font-semibold">
-                  {stats.totalOrders || 0}
-                </h3>
+                <h3 className="text-2xl font-semibold">{stats.totalOrders || 0}</h3>
               </div>
               <Car className="text-green-500 w-8 h-8" />
             </div>
@@ -88,9 +84,7 @@ const Main = () => {
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-gray-500 text-sm">Paid Orders</p>
-                <h3 className="text-2xl font-semibold">
-                  {stats.paidOrders || 0}
-                </h3>
+                <h3 className="text-2xl font-semibold">{stats.paidOrders || 0}</h3>
               </div>
               <CreditCard className="text-purple-500 w-8 h-8" />
             </div>
@@ -177,9 +171,7 @@ const Main = () => {
             </li>
             <li className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
               <TrendingUp className="w-4 h-4 text-green-500" />
-              <span>
-                Your class attendance rate increased by 15% this week.
-              </span>
+              <span>Your class attendance rate increased by 15% this week.</span>
             </li>
           </ul>
         </div>

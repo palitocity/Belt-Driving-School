@@ -21,7 +21,7 @@ const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
     {
       name: "Add Student",
       icon: <LayoutDashboard className="w-5 h-5" />,
-      path: "/instructor/add-student",
+      path: "/instructor/addStudent",
     },
     {
       name: "Students",
