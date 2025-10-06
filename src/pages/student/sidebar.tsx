@@ -1,15 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import {
-  Users,
+  LayoutDashboard,
+  BarChart3,
+  User,
+  LogOut,
+  X,
   CreditCard,
   Settings,
-  LayoutDashboard,
-  Award,
-  X,
   Book,
-  Ambulance,
-  LogOut,
+  Award,
 } from "lucide-react";
 import { useRouter } from "next/router";
 
@@ -18,56 +18,34 @@ interface Props {
   sidebarOpen: boolean;
 }
 
-const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
+const StudentSidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
   const router = useRouter();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-
   const menuItems = [
     {
       name: "Dashboard",
       icon: <LayoutDashboard className="w-5 h-5" />,
-      path: "/admin/main",
+      path: "/student/dashboard",
     },
     {
-      name: "Students",
-      icon: <Users className="w-5 h-5" />,
-      path: "/admin/student",
-    },
-    {
-      name: "Instructors",
+      name: "Progress",
       icon: <Award className="w-5 h-5" />,
-      path: "/admin/instructors",
+      path: "/student/progress",
     },
-    // {
-    //   name: "Training Programs",
-    //   icon: <Car className="w-5 h-5" />,
-    //   path: "/admin/trainingprograms",
-    // },
     {
-      name: "Accidents",
-      icon: <Ambulance className="w-5 h-5" />,
-      path: "/admin/accidents",
+      name: "All Plans",
+      icon: <Book className="w-5 h-5" />,
+      path: "/student/all-plans",
     },
-    // {
-    //   name: "Driver’s License",
-    //   icon: <FileBadge className="w-5 h-5" />,
-    //   path: "/admin/driverlicense",
-    // },
-    { name: "Plans", icon: <Book className="w-5 h-5" />, path: "/admin/plans" },
     {
-      name: "Payments",
+      name: "Active Plan",
       icon: <CreditCard className="w-5 h-5" />,
-      path: "/admin/payments",
+      path: "/student/active-plan",
     },
     {
-      name: "Team",
-      icon: <Users className="w-5 h-5" />,
-      path: "/admin/team",
-    },
-    {
-      name: "Settings",
+      name: "Update Profile",
       icon: <Settings className="w-5 h-5" />,
-      path: "/admin/settings",
+      path: "/student/update-profile",
     },
   ];
 
@@ -104,7 +82,7 @@ const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
           ))}
         </nav>
 
-        {/* Logout button */}
+        {/* Logout */}
         <div className="px-4 py-4 border-t border-white/20">
           <button
             onClick={() => setShowLogoutModal(true)}
@@ -133,7 +111,7 @@ const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
           </nav>
         </div>
 
-        {/* Logout button */}
+        {/* Logout */}
         <div className="px-4 py-4 border-t border-white/20">
           <button
             onClick={() => setShowLogoutModal(true)}
@@ -145,7 +123,7 @@ const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
         </div>
       </aside>
 
-      {/* Logout Confirmation Modal */}
+      {/* Logout Modal */}
       {showLogoutModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[60]">
           <div className="bg-white rounded-xl shadow-xl p-6 w-80 text-center">
@@ -177,4 +155,4 @@ const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
   );
 };
 
-export default Sidebar;
+export default StudentSidebar;
