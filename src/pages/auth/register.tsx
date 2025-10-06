@@ -182,7 +182,7 @@ const RegistrationForm = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E02828] outline-none"
               >
                 <option value="">Select your role</option>
-                <option value="student">Student</option>
+                <option value="user">Student</option>
                 <option value="instructor">Instructor</option>
                 {/* <option value="admin">Admin</option> */}
               </select>
