@@ -32,7 +32,7 @@ const AddStudent = () => {
 
       const response = await axios.post(
         "https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/assign-student",
-        { email },
+        { id, email },
         {
           headers: {
             Authorization: `Bearer ${token}`,
