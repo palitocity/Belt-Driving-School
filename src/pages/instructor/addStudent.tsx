@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import Instructorlayouts from "../layouts/Instructorlayout";
 import Head from "next/head";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import { UserPlus, Loader2, CheckCircle, XCircle } from "lucide-react";
+import toast from "react-hot-toast";
 
 const AddStudent = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{ type: string; text: string } | null>(null);
+  const [message, setMessage] = useState<{ type: string; text: string } | null>(
+    null
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,7 +20,10 @@ const AddStudent = () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        setMessage({ type: "error", text: "Unauthorized. Please log in again." });
+        setMessage({
+          type: "error",
+          text: "Unauthorized. Please log in again.",
+        });
         setLoading(false);
         return;
       }
@@ -39,14 +45,18 @@ const AddStudent = () => {
         });
         setEmail("");
       }
-    } catch (error: any) {
-      console.error("Error assigning student:", error);
-      setMessage({
-        type: "error",
-        text:
-          error.response?.data?.message ||
-          "Failed to assign student. Please check the email and try again.",
-      });
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const apiMessage = error.response?.data?.message;
+        const apiError = error.response?.data?.error;
+        const fallback = error.message || "An unexpected error occurred";
+
+        const errorMsg =
+          `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
+          fallback;
+
+        toast.error(errorMsg);
+      }
     } finally {
       setLoading(false);
     }
@@ -114,7 +124,6 @@ const AddStudent = () => {
             )}
           </button>
         </form>
-        
       </div>
     </Instructorlayouts>
   );
