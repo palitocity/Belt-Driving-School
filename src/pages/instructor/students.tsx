@@ -29,9 +29,10 @@ const StudentsList = () => {
 
       // Replace this with instructor id from context, token, or state
       const instructorId = localStorage.getItem("user");
+      const id = instructorId ? JSON.parse(instructorId).id : null;
 
       const response = await axios.get(
-        `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/${instructorId}/students`,
+        `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/${id}/students`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
