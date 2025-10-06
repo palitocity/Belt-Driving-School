@@ -29,27 +29,27 @@ const faqs = [
       "We provide well-maintained training vehicles, but you can also choose to train with your own car if you prefer.",
   },
   {
-    question: "How long does it take to process a new driver’s license?",
+    question: "How long does it take to process a new driver's license?",
     answer:
       "Typically, processing takes a few days to a couple of weeks depending on the authorities, but we offer support to ensure a faster process.",
   },
   {
-    question: "Can you help me renew my driver’s license if it is expired?",
+    question: "Can you help me renew my driver's license if it is expired?",
     answer:
       "Yes. We handle license renewals efficiently, even if your license has already expired.",
   },
   {
-    question: "What documents do I need to apply for a learner’s permit?",
+    question: "What documents do I need to apply for a learner's permit?",
     answer:
-      "You’ll need a passport photograph, proof of identity, and a medical certificate of fitness. Our team will guide you through the details.",
+      "You'll need a passport photograph, proof of identity, and a medical certificate of fitness. Our team will guide you through the details.",
   },
   {
-    question: "Is it possible to process a driver’s license within a few days?",
+    question: "Is it possible to process a driver's license within a few days?",
     answer:
-      "Yes. We provide express services to help you process your driver’s license quickly and hassle-free.",
+      "Yes. We provide express services to help you process your driver's license quickly and hassle-free.",
   },
   {
-    question: "Can you help me if my driver’s license has errors on it?",
+    question: "Can you help me if my driver's license has errors on it?",
     answer:
       "Yes. We assist in correcting errors such as misspelled names, incorrect dates, or other issues on your license.",
   },
@@ -66,12 +66,12 @@ const faqs = [
   {
     question: "What do I need to bring for a change of ownership?",
     answer:
-      "You’ll need the old registration documents, proof of purchase, and a valid means of identification. Our staff will guide you through the process.",
+      "You'll need the old registration documents, proof of purchase, and a valid means of identification. Our staff will guide you through the process.",
   },
   {
     question: "Can you help me if my car documents are already expired?",
     answer:
-      "Yes. We can still assist with renewal, but additional charges may apply depending on the authority’s regulations.",
+      "Yes. We can still assist with renewal, but additional charges may apply depending on the authority's regulations.",
   },
   {
     question: "Do you assist with vehicle insurance as well?",

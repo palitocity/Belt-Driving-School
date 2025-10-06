@@ -26,48 +26,22 @@ const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
     {
       name: "Dashboard",
       icon: <LayoutDashboard className="w-5 h-5" />,
-      path: "/admin/main",
+      path: "/instructor/main",
+    },
+    {
+      name: "Add Student",
+      icon: <LayoutDashboard className="w-5 h-5" />,
+      path: "/instructor/add-student",
     },
     {
       name: "Students",
       icon: <Users className="w-5 h-5" />,
-      path: "/admin/student",
-    },
-    {
-      name: "Instructors",
-      icon: <Award className="w-5 h-5" />,
-      path: "/admin/instructors",
-    },
-    // {
-    //   name: "Training Programs",
-    //   icon: <Car className="w-5 h-5" />,
-    //   path: "/admin/trainingprograms",
-    // },
-    {
-      name: "Accidents",
-      icon: <Ambulance className="w-5 h-5" />,
-      path: "/admin/accidents",
-    },
-    // {
-    //   name: "Driver’s License",
-    //   icon: <FileBadge className="w-5 h-5" />,
-    //   path: "/admin/driverlicense",
-    // },
-    { name: "Plans", icon: <Book className="w-5 h-5" />, path: "/admin/plans" },
-    {
-      name: "Payments",
-      icon: <CreditCard className="w-5 h-5" />,
-      path: "/admin/payments",
-    },
-    {
-      name: "Team",
-      icon: <Users className="w-5 h-5" />,
-      path: "/admin/team",
+      path: "/instructor/students",
     },
     {
       name: "Settings",
       icon: <Settings className="w-5 h-5" />,
-      path: "/admin/settings",
+      path: "/instructor/settings",
     },
   ];
 
