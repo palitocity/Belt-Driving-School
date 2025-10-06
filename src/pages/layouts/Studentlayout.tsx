@@ -1,27 +1,36 @@
-import React, { ReactNode } from "react";
-import Header from "../(components)/Header";
-import PropTypes from "prop-types";
-import Footer from "../(components)/Footer";
+import React, { ReactNode, useState } from "react";
+import DashboardHeader from "../student/dasheader";
+import Sidebar from "../student/sidebar";
 
 interface MainlayoutProps {
   children: ReactNode;
 }
 
-const Aboutuslayouts: React.FC<MainlayoutProps> = ({ children }) => {
+const StudentLayouts: React.FC<MainlayoutProps> = ({ children }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <>
-      <div className="text">
-        <Header />
+    <div className="h-screen w-full flex flex-col">
+      {/* HEADER */}
+      <div className="h-[10vh]">
+        <DashboardHeader
+          setSidebarOpen={setSidebarOpen}
+          sidebarOpen={sidebarOpen}
+        />
       </div>
-      <div className="w-full h-auto ">{children}</div>
-      <div className="">
-        <Footer />
+
+      {/* BODY */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar */}
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+        {/* Main Content */}
+        <main className="flex-1 overflow-y-auto p-4 bg-gray-50">
+          {children}
+        </main>
       </div>
-    </>
+    </div>
   );
 };
-Aboutuslayouts.propTypes = {
-  children: PropTypes.node,
-};
 
-export default Aboutuslayouts;
+export default StudentLayouts;
