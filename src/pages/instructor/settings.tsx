@@ -1,8 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Instructorlayouts from "../layouts/Instructorlayout";
 import Head from "next/head";
 import axios from "axios";
-import { User, Mail, Phone, MapPin, Edit2,Award, TrendingUp } from "lucide-react";
+import {
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Edit2,
+  Award,
+  TrendingUp,
+} from "lucide-react";
 
 interface InstructorProfile {
   id?: string;
@@ -82,7 +91,9 @@ const Settings = () => {
       </Head>
 
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-sm mt-4">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Profile Settings</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">
+          Profile Settings
+        </h2>
 
         {!editing ? (
           <div className="space-y-4">
