@@ -32,7 +32,7 @@ const StudentsList = () => {
       const id = instructorId ? JSON.parse(instructorId).id : null;
 
       const response = await axios.get(
-        `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/${id}/students`,
+        `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/${instructorId}/students`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
