@@ -42,7 +42,7 @@ const Settings = () => {
     const getProfile = async () => {
       try {
         const res = await axios.get(
-          `https://belt-driving-school.vercel.app/api/instructor/profile/${instructorId}`,
+          `https://belt-driving-school-backend-3.onrender.com/api/instructor/profile/${instructorId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -66,7 +66,7 @@ const Settings = () => {
 
     try {
       const res = await axios.put(
-        `https://belt-driving-school.vercel.app/api/instructor/profile/${instructorId}`,
+        `https://belt-driving-school-backend-3.onrender.com/api/instructor/profile/${instructorId}`,
         formData,
         {
           headers: {

@@ -31,7 +31,7 @@ const StudentsList = () => {
       const instructorId = localStorage.getItem("instructorId");
 
       const response = await axios.get(
-        `https://belt-driving-school.vercel.app/api/instructor/dashboard/${instructorId}/students`,
+        `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/${instructorId}/students`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
