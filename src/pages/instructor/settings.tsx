@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Instructorlayouts from "../layouts/Instructorlayout";
 import Head from "next/head";
@@ -31,40 +30,36 @@ const Settings = () => {
   const [formData, setFormData] = useState<InstructorProfile>({});
   const [instructorId, setInstructorId] = useState<string | null>(null);
 
-  //   useEffect(() => {
-  //     // ✅ Access localStorage safely here
-  //     const storedId = localStorage.getItem("user");
-  //     setInstructorId(storedId ? JSON.parse(storedId).id : null);
-  //   }, []);
-  const getProfile = async () => {
-    const storedId = localStorage.getItem("user");
-    const id = storedId ? JSON.parse(storedId).id : null;
-    setInstructorId(id);
-    if (!id) {
-      setLoading(false);
-      return;
-    }
-    try {
-      const res = await axios.get(
-        `https://belt-driving-school-backend-3.onrender.com/api/instructor/profile/${instructorId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      setProfile(res.data);
-      setFormData(res.data);
-    } catch (error) {
-      console.error("Error fetching profile:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    // ✅ Access localStorage safely here
+    const storedId = localStorage.getItem("instructorId");
+    setInstructorId(storedId);
+  }, []);
 
   useEffect(() => {
+    if (!instructorId) return;
+
+    const getProfile = async () => {
+      try {
+        const res = await axios.get(
+          `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/profile/${instructorId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setProfile(res.data);
+        setFormData(res.data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     getProfile();
-  }, []);
+  }, [instructorId]);
 
   const updateProfile = async () => {
     if (!instructorId) return;
