@@ -21,7 +21,7 @@ const DashboardHeader: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
       <div className="flex items-center gap-2">
         <Image src={logo} alt="logo" className="h-10 w-auto" />
         <h2 className="hidden md:block font-bold text-[#0A2E57] text-lg">
-          Belt Driving School Admin
+          Belt Driving School Student
         </h2>
       </div>
 
