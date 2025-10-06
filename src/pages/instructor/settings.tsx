@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 import Instructorlayouts from "../layouts/Instructorlayout";
 import Head from "next/head";
 import axios from "axios";
-import { User, Mail, Phone, MapPin, Edit2,Award, TrendingUp } from "lucide-react";
+import {
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Edit2,
+  Award,
+  TrendingUp,
+} from "lucide-react";
 
 interface InstructorProfile {
   id?: string;
@@ -20,29 +28,42 @@ const Settings = () => {
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState<InstructorProfile>({});
+  const [instructorId, setInstructorId] = useState<string | null>(null);
 
-  const instructorId = localStorage.getItem("instructorId"); // Assuming this is stored at login
+  useEffect(() => {
+    // ✅ Access localStorage safely here
+    const storedId = localStorage.getItem("instructorId");
+    setInstructorId(storedId);
+  }, []);
 
-  const getProfile = async () => {
-    try {
-      const res = await axios.get(
-        `https://belt-driving-school.vercel.app/api/instructor/profile/${instructorId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      setProfile(res.data);
-      setFormData(res.data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching profile:", error);
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    if (!instructorId) return;
+
+    const getProfile = async () => {
+      try {
+        const res = await axios.get(
+          `https://belt-driving-school.vercel.app/api/instructor/profile/${instructorId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setProfile(res.data);
+        setFormData(res.data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getProfile();
+  }, [instructorId]);
 
   const updateProfile = async () => {
+    if (!instructorId) return;
+
     try {
       const res = await axios.put(
         `https://belt-driving-school.vercel.app/api/instructor/profile/${instructorId}`,
@@ -61,10 +82,6 @@ const Settings = () => {
     }
   };
 
-  useEffect(() => {
-    getProfile();
-  }, []);
-
   if (loading) {
     return (
       <Instructorlayouts>
@@ -82,7 +99,9 @@ const Settings = () => {
       </Head>
 
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-sm mt-4">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Profile Settings</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">
+          Profile Settings
+        </h2>
 
         {!editing ? (
           <div className="space-y-4">

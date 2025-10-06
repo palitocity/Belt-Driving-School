@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import Instructorlayouts from "../layouts/Instructorlayout";
 import Head from "next/head";
 import { Users, Loader2, AlertCircle } from "lucide-react";
+import toast from "react-hot-toast";
 
 interface Student {
   _id: string;
@@ -39,12 +40,18 @@ const StudentsList = () => {
       );
 
       setStudents(response.data.students || []);
-    } catch (err: any) {
-      console.error("Error fetching students:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to fetch students. Please try again."
-      );
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const apiMessage = error.response?.data?.message;
+        const apiError = error.response?.data?.error;
+        const fallback = error.message || "An unexpected error occurred";
+
+        const errorMsg =
+          `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
+          fallback;
+
+        toast.error(errorMsg);
+      }
     } finally {
       setLoading(false);
     }
@@ -99,12 +106,24 @@ const StudentsList = () => {
             <table className="min-w-full border-collapse">
               <thead className="bg-blue-600 text-white">
                 <tr>
-                  <th className="px-6 py-3 text-left text-sm font-semibold">Name</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold">Email</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold">Phone</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold">Course Level</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold">Progress</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold">Enrollment Date</th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold">
+                    Name
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold">
+                    Email
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold">
+                    Phone
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold">
+                    Course Level
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold">
+                    Progress
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold">
+                    Enrollment Date
+                  </th>
                 </tr>
               </thead>
 
