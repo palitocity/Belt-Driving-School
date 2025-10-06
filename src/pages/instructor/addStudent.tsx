@@ -21,6 +21,8 @@ const AddStudent = () => {
       const token = localStorage.getItem("token");
       const instructorId = localStorage.getItem("user");
       const id = instructorId ? JSON.parse(instructorId).id : null;
+      console.log(id);
+
       if (!token) {
         setMessage({
           type: "error",
@@ -31,8 +33,8 @@ const AddStudent = () => {
       }
 
       const response = await axios.post(
-        "https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/assign-student",
-        { id, email },
+        "https://belt-driving-school-backend-3.onrender.com/api/instructor/assign-student",
+        { email },
         {
           headers: {
             Authorization: `Bearer ${token}`,
