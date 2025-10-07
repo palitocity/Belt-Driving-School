@@ -30,11 +30,6 @@ const Settings = () => {
   const [formData, setFormData] = useState<InstructorProfile>({});
   const [instructorId, setInstructorId] = useState<string | null>(null);
 
-//   useEffect(() => {
-//     // ✅ Access localStorage safely here
-//     const storedId = localStorage.getItem("user");
-//     setInstructorId(storedId ? JSON.parse(storedId).id : null);
-//   }, []);
  const getProfile = async () => {
     const storedId = localStorage.getItem("user");
     const id = storedId ? JSON.parse(storedId).id : null;
