@@ -6,7 +6,7 @@ import { Car, User, CalendarDays, PhoneCall, Loader2 } from "lucide-react";
 
 import toast from "react-hot-toast";
 import StudentLayouts from "../layouts/Studentlayout";
-import { isAxiosError } from "axios";
+import axios, { isAxiosError } from "axios";
 
 const ActivePlan = () => {
   const [activePlan, setActivePlan] = useState<any>(null);
@@ -16,10 +16,15 @@ const ActivePlan = () => {
   useEffect(() => {
     const fetchActivePlan = async () => {
       try {
-        // const res = await axios.get("/plans/active", {
-        //   headers: { Authorization: `${localStorage.getItem("token")}` },
-        // });
-        // setActivePlan(res.data.plan);
+        const res = await axios.get(
+          "https://belt-driving-school-backend-3.onrender.com/api/user/activity/plan",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setActivePlan(res.data.plan);
 
         // Demo data:
         setActivePlan({

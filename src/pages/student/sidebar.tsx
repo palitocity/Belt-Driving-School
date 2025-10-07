@@ -23,7 +23,7 @@ const StudentSidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
     {
       name: "Dashboard",
       icon: <LayoutDashboard className="w-5 h-5" />,
-      path: "/student/dashboard",
+      path: "/student/main",
     },
     {
       name: "Progress",
