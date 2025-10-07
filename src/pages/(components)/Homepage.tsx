@@ -9,6 +9,7 @@ import Certificates from "./OurCertificate";
 import Testimonials from "./Testomony";
 import WhyChooseUs from "./WhyChooseUs";
 import PlanSection from "./planSelection";
+import TeamPage from "./team";
 
 const Homepage = () => {
   return (
@@ -36,6 +37,9 @@ const Homepage = () => {
       </section>
       <section>
         <Testimonials />
+      </section>
+      <section>
+        <TeamPage />
       </section>
     </Homelayouts>
   );
