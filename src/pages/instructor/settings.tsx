@@ -14,7 +14,7 @@ import {
 
 interface InstructorProfile {
   id?: string;
-  fullname?: string;
+  fullName?: string;
   email?: string;
   phone?: string;
   address?: string;
@@ -112,7 +112,7 @@ const Settings = () => {
             <div className="flex items-center space-x-3">
               <User className="text-blue-500" />
               <p className="text-gray-700 font-medium">
-                {profile?.fullname || "N/A"}
+                {profile?.fullName || "N/A"}
               </p>
             </div>
 
