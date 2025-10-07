@@ -70,7 +70,7 @@ const Settings = () => {
 
     try {
       const res = await axios.put(
-        `https://belt-driving-school-backend-3.onrender.com/api/instructor/profile/${instructorId}`,
+        `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/profile/${instructorId}`,
         formData,
         {
           headers: {
