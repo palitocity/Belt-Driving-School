@@ -156,16 +156,16 @@ const Settings = () => {
           <div className="space-y-4">
             <input
               type="text"
-              placeholder="Full Name"
-              value={formData.fullname || ""}
+              placeholder={profile?.fullName || "Full Name"}
+              value={formData.fullName || ""}
               onChange={(e) =>
-                setFormData({ ...formData, fullname: e.target.value })
+                setFormData({ ...formData, fullName: e.target.value })
               }
               className="w-full border border-gray-300 p-2 rounded-md"
             />
             <input
               type="text"
-              placeholder="Phone"
+              placeholder={profile?.phone || "Phone"}
               value={formData.phone || ""}
               onChange={(e) =>
                 setFormData({ ...formData, phone: e.target.value })
@@ -174,7 +174,7 @@ const Settings = () => {
             />
             <input
               type="text"
-              placeholder="Address"
+              placeholder={profile?.address || "Address"}
               value={formData.address || ""}
               onChange={(e) =>
                 setFormData({ ...formData, address: e.target.value })
@@ -183,7 +183,7 @@ const Settings = () => {
             />
             <input
               type="text"
-              placeholder="License Number"
+              placeholder={profile?.licenseNumber || "License Number"}
               value={formData.licenseNumber || ""}
               onChange={(e) =>
                 setFormData({ ...formData, licenseNumber: e.target.value })
