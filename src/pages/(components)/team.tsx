@@ -22,7 +22,7 @@ export default function TeamPage() {
     const fetchTeam = async () => {
       try {
         const res = await axios.get(
-          "https://belt-driving-school.vercel.app/api/authteam/all"
+          "https://belt-driving-school.vercel.app/api/auth/team/all"
         );
         setTeam(res.data);
       } catch (error) {
@@ -38,10 +38,10 @@ export default function TeamPage() {
     <section className="bg-gray-50 py-16">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <h2 className="text-4xl font-bold text-gray-900 mb-6">
-          Meet Our Instructors
+          Meet Our Team
         </h2>
         <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
-          Our professional instructors are dedicated to making every driving
+          Our professional Team are dedicated to making every driving
           experience safe, enjoyable, and educational.
         </p>
 
