@@ -1,9 +1,9 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { Car, User, CalendarDays, PhoneCall, Loader2 } from "lucide-react";
-
 import toast from "react-hot-toast";
 import StudentLayouts from "../layouts/Studentlayout";
 import axios, { isAxiosError } from "axios";
@@ -11,22 +11,56 @@ import axios, { isAxiosError } from "axios";
 const ActivePlan = () => {
   const [activePlan, setActivePlan] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [studentId, setStudentId] = useState<string | null>(null);
 
-  // Demo student active plan — replace with backend request
+  // ✅ Get student ID from localStorage
   useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        if (parsedUser.id) {
+          setStudentId(parsedUser.id);
+          console.log("Student ID found:", parsedUser.id);
+        } else {
+          console.warn("No student ID found in localStorage user object");
+        }
+      } catch (error) {
+        console.error("Error parsing user from localStorage:", error);
+      }
+    }
+  }, []);
+
+  // ✅ Fetch Active Plan from API
+  useEffect(() => {
+    if (!studentId) return;
+
     const fetchActivePlan = async () => {
       try {
+        setLoading(true);
         const res = await axios.get(
-          "https://belt-driving-school-backend-3.onrender.com/api/user/activity/plan",
+          `https://belt-driving-school-backend-3.onrender.com/api/user/activity/plan/${studentId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );
-        setActivePlan(res.data.plan);
 
-        // Demo data:
+        console.log("Fetched Active Plan:", res.data);
+        setActivePlan(res.data.plan);
+      } catch (error) {
+        if (isAxiosError(error)) {
+          const apiMsg = error.response?.data?.message;
+          const apiErr = error.response?.data?.error;
+          const fallback = error.message || "An unexpected error occurred";
+          const errorMsg =
+            `${apiMsg || ""}${apiErr ? " - " + apiErr : ""}`.trim() || fallback;
+
+          toast.error(errorMsg);
+        }
+
+        // 🧪 Demo fallback
         setActivePlan({
           name: "Intermediate Driving",
           duration: "4 weeks",
@@ -39,26 +73,15 @@ const ActivePlan = () => {
           startDate: "2025-09-15",
           nextLesson: "2025-10-08",
         });
-      } catch (error) {
-        if (isAxiosError(error)) {
-          const apiMessage = error.response?.data?.message;
-          const apiError = error.response?.data?.error;
-          const fallback = error.message || "An unexpected error occurred";
-
-          const errorMsg =
-            `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
-            fallback;
-
-          toast.error(errorMsg);
-        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchActivePlan();
-  }, []);
+  }, [studentId]);
 
+  // ✅ Progress calculator
   const calculateProgress = () => {
     if (!activePlan) return 0;
     return Math.round((activePlan.completedLessons / activePlan.lessons) * 100);
@@ -121,7 +144,7 @@ const ActivePlan = () => {
                   <div>
                     <p className="text-sm text-gray-500">Instructor</p>
                     <p className="font-medium text-gray-800">
-                      {activePlan.instructor.name}
+                      {activePlan.instructor?.name || "N/A"}
                     </p>
                   </div>
                 </div>
@@ -131,7 +154,7 @@ const ActivePlan = () => {
                   <div>
                     <p className="text-sm text-gray-500">Contact</p>
                     <p className="font-medium text-gray-800">
-                      {activePlan.instructor.phone}
+                      {activePlan.instructor?.phone || "N/A"}
                     </p>
                   </div>
                 </div>
@@ -144,7 +167,9 @@ const ActivePlan = () => {
                   <div>
                     <p className="text-sm text-gray-500">Start Date</p>
                     <p className="font-medium text-gray-800">
-                      {new Date(activePlan.startDate).toDateString()}
+                      {activePlan.startDate
+                        ? new Date(activePlan.startDate).toDateString()
+                        : "N/A"}
                     </p>
                   </div>
                 </div>
@@ -154,7 +179,9 @@ const ActivePlan = () => {
                   <div>
                     <p className="text-sm text-gray-500">Next Lesson</p>
                     <p className="font-medium text-gray-800">
-                      {new Date(activePlan.nextLesson).toDateString()}
+                      {activePlan.nextLesson
+                        ? new Date(activePlan.nextLesson).toDateString()
+                        : "N/A"}
                     </p>
                   </div>
                 </div>
@@ -174,7 +201,7 @@ const ActivePlan = () => {
             <div className="text-center py-20 text-gray-600">
               <p>No active plan found.</p>
               <a
-                href="/student/plans/all-plans"
+                href="/student/all-plans"
                 className="text-[#E02828] font-semibold mt-2 inline-block"
               >
                 Browse Plans

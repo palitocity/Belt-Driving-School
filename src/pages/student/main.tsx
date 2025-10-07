@@ -30,8 +30,7 @@ const StudentDashboard = () => {
 
         toast.error(errorMsg);
       }
-    }
-    {
+    } finally {
       setLoading(false);
     }
   };
@@ -53,6 +52,7 @@ const StudentDashboard = () => {
     student?.studentDetails?.enrollmentDate
   ).toLocaleDateString();
   const progress = student?.studentDetails?.progress || 0;
+  const instructor = student?.studentDetails?.assignedInstructor;
 
   return (
     <StudentLayouts>
@@ -103,23 +103,36 @@ const StudentDashboard = () => {
           </p>
         </div>
 
-        {/* Instructor / Transactions Section */}
+        {/* Instructor / Transactions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Assigned Instructor */}
           <div className="bg-white shadow-md rounded-xl p-6">
             <h3 className="text-lg font-semibold text-[#0A2E57] mb-3">
-              Instructor
+              Assigned Instructor
             </h3>
-            {student?.instructorDetails?.assignedStudents?.length > 0 ? (
-              <p className="text-gray-600 text-sm">
-                You’ve been assigned to an instructor.
-              </p>
+            {instructor ? (
+              <div className="space-y-2 text-gray-700">
+                <p>
+                  <span className="font-medium text-[#E02828]">Name:</span>{" "}
+                  {instructor.fullName}
+                </p>
+                <p>
+                  <span className="font-medium text-[#E02828]">Email:</span>{" "}
+                  {instructor.email}
+                </p>
+                <p>
+                  <span className="font-medium text-[#E02828]">Phone:</span>{" "}
+                  {instructor.phone}
+                </p>
+              </div>
             ) : (
               <p className="text-gray-600 text-sm">
-                No instructor assigned yet.
+                No instructor has been assigned to you yet.
               </p>
             )}
           </div>
 
+          {/* Recent Transactions */}
           <div className="bg-white shadow-md rounded-xl p-6">
             <h3 className="text-lg font-semibold text-[#0A2E57] mb-3">
               Recent Transactions
