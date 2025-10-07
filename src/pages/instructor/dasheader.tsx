@@ -6,6 +6,7 @@ import { ChevronDown, LogOut, Search, Settings, User } from "lucide-react";
 
 import userprofilepic from "../../../assets/blank-profile-picture.webp";
 import { MdMenu } from "react-icons/md";
+import { useRouter } from "next/router";
 
 interface Props {
   setSidebarOpen: (open: boolean) => void;
@@ -14,6 +15,8 @@ interface Props {
 
 const DashboardHeader: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
   const [dropdown, setDropdown] = useState(false);
+
+  const router = useRouter();
 
   return (
     <header className="w-full h-full flex items-center justify-between px-4 md:px-6 bg-white">
@@ -53,7 +56,10 @@ const DashboardHeader: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
 
           {dropdown && (
             <div className="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-md py-2 z-50">
-              <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2">
+              <button
+                onClick={() => router.push("/instructor/instructorprofile")}
+                className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2"
+              >
                 <User className="w-4 h-4" /> Profile
               </button>
               <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2">
