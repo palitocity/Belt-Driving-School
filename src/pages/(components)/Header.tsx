@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../../assets/logo.jpg";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import logo from "../../../assets/logo.jpg";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -15,6 +14,27 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Driving Training", path: "/driver" },
+    { name: "Driver’s License", path: "/driver" },
+    { name: "Defensive Training", path: "/defensive-training" },
+    { name: "Book a Consult", path: "/book-consult" },
+    { name: "Contact Us", path: "/contact" },
+  ];
+
+  const aboutLinks = [
+    { name: "Company Overview", path: "/about" },
+    { name: "Why Choose Us?", path: "/why-choose-us" },
+    { name: "Our Team", path: "/team" },
+    { name: "Our Partners", path: "/partners" },
+  ];
+
+  const handleNav = (path: string) => {
+    router.push(path);
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header
@@ -26,7 +46,10 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center">
+        <div
+          className="flex items-center cursor-pointer"
+          onClick={() => router.push("/")}
+        >
           <Image
             src={logo}
             alt="Belt Driving School Logo"
@@ -36,21 +59,18 @@ const Header = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-1">
-          {[
-            "Home",
-            "Driving Training",
-            "Driver's License",
-            "Defensive Training",
-            "Deals & Promo",
-            "Contact Us",
-          ].map((item, i) => (
-            <a
+          {navLinks.map((item, i) => (
+            <button
               key={i}
-              href="#"
-              className="px-2 py-1 text-sm text-white font-medium hover:text-[#E02828] transition"
+              onClick={() => handleNav(item.path)}
+              className={`px-2 py-1 text-sm font-medium transition ${
+                router.pathname === item.path
+                  ? "text-[#E02828]"
+                  : "text-white hover:text-[#E02828]"
+              }`}
             >
-              {item}
-            </a>
+              {item.name}
+            </button>
           ))}
 
           {/* About Us Dropdown */}
@@ -59,22 +79,14 @@ const Header = () => {
               About Us
             </button>
             <div className="absolute left-0 mt-2 w-52 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
-              {[
-                "Company Overview",
-                "Awards & Achievements",
-                "Why Choose Us?",
-                "Our Facilities",
-                "Our Partners",
-                "Careers Opportunity",
-                "Contact Us",
-              ].map((link, i) => (
-                <a
+              {aboutLinks.map((link, i) => (
+                <button
                   key={i}
-                  href="#"
-                  className="block px-3 py-2 text-sm text-[#0A2E57] hover:bg-[#E02828] hover:text-white transition"
+                  onClick={() => handleNav(link.path)}
+                  className="block w-full text-left px-3 py-2 text-sm text-[#0A2E57] hover:bg-[#E02828] hover:text-white transition"
                 >
-                  {link}
-                </a>
+                  {link.name}
+                </button>
               ))}
             </div>
           </div>
@@ -99,7 +111,7 @@ const Header = () => {
         {/* Mobile Menu Toggle */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="lg:hidden text-white p-2"
+          className="lg:hidden text-white p-2 text-2xl"
         >
           {isMobileMenuOpen ? "✖" : "☰"}
         </button>
@@ -108,10 +120,16 @@ const Header = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-white shadow-md">
-          <nav className="px-6 py-4 space-y-2">
-            <a href="#" className="block text-[#0A2E57] font-medium">
-              Home
-            </a>
+          <nav className="px-6 py-4 space-y-3">
+            {navLinks.map((link, i) => (
+              <button
+                key={i}
+                onClick={() => handleNav(link.path)}
+                className="block text-[#0A2E57] font-medium w-full text-left"
+              >
+                {link.name}
+              </button>
+            ))}
 
             {/* Mobile About Us Dropdown */}
             <div>
@@ -123,42 +141,20 @@ const Header = () => {
               </button>
               {isAboutOpen && (
                 <div className="mt-2 space-y-1 pl-4">
-                  {[
-                    "Company Overview",
-                    "Awards & Achievements",
-                    "Why Choose Us?",
-                    "Our Facilities",
-                    "Our Partners",
-                    "Careers Opportunity",
-                  ].map((link, i) => (
-                    <a
+                  {aboutLinks.map((link, i) => (
+                    <button
                       key={i}
-                      href="#"
-                      className="block py-1 text-[#0A2E57] hover:bg-[#E02828]/20 rounded"
+                      onClick={() => handleNav(link.path)}
+                      className="block w-full text-left py-1 text-[#0A2E57] hover:bg-[#E02828]/20 rounded"
                     >
-                      {link}
-                    </a>
+                      {link.name}
+                    </button>
                   ))}
                 </div>
               )}
             </div>
 
-            <a href="#" className="block text-[#0A2E57] font-medium">
-              Driving Training
-            </a>
-            <a href="#" className="block text-[#0A2E57] font-medium">
-              Driver&lsquo;s License
-            </a>
-            <a href="#" className="block text-[#0A2E57] font-medium">
-              Defensive Training
-            </a>
-            <a href="#" className="block text-[#0A2E57] font-medium">
-              Deals & Promo
-            </a>
-            <a href="#" className="block text-[#0A2E57] font-medium">
-              Contact Us
-            </a>
-
+            {/* CTA section */}
             <div className="pt-4 space-y-2">
               <a
                 href="tel:+2348001234567"
@@ -167,7 +163,7 @@ const Header = () => {
                 📞 +234 800 123 4567
               </a>
               <button
-                onClick={() => router.push("/auth/register")}
+                onClick={() => handleNav("/auth/register")}
                 className="w-full bg-[#E02828] text-white font-bold py-2 rounded-md"
               >
                 Enroll Now
