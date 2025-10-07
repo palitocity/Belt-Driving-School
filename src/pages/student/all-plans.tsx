@@ -1,148 +1,202 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { useState } from "react";
-import { CheckCircle } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import StudentLayouts from "../layouts/Studentlayout";
 import Head from "next/head";
 import axios, { isAxiosError } from "axios";
+import { Loader2, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
-import StudentLayouts from "../layouts/Studentlayout";
 
 const AllPlans = () => {
-  const [loadingPlanId, setLoadingPlanId] = useState<string | null>(null);
+  const [plans, setPlans] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activating, setActivating] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [student, setStudent] = useState<any>(null);
 
-  // ✅ Demo plans data
-  const plans = [
-    {
-      id: "basic",
-      name: "Basic Driving",
-      description:
-        "Perfect for beginners. Learn the fundamentals of driving, road rules, and safety.",
-      price: "₦25,000",
-      duration: "2 weeks",
-      lessons: 10,
-      color: "bg-blue-50 border-blue-200",
-    },
-    {
-      id: "intermediate",
-      name: "Intermediate Driving",
-      description:
-        "Enhance your driving confidence with more practice sessions and real-road experience.",
-      price: "₦40,000",
-      duration: "4 weeks",
-      lessons: 20,
-      color: "bg-green-50 border-green-200",
-    },
-    {
-      id: "advanced",
-      name: "Advanced Driving",
-      description:
-        "For experienced learners. Learn advanced maneuvers, defensive driving, and highway control.",
-      price: "₦60,000",
-      duration: "6 weeks",
-      lessons: 30,
-      color: "bg-yellow-50 border-yellow-200",
-    },
-  ];
+  // ✅ Load Student from localStorage
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        if (parsedUser) {
+          setStudent(parsedUser);
+          console.log("✅ Student loaded:", parsedUser);
+        }
+      } catch (error) {
+        console.error("Error parsing user from localStorage:", error);
+      }
+    }
+  }, []);
 
-  // ✅ Function to activate a plan
-  const handleActivatePlan = async (planId: string) => {
+  // ✅ Fetch All Plans
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        const res = await axios.get(
+          "https://belt-driving-school-backend-3.onrender.com/api/auth/plans"
+        );
+        setPlans(res.data);
+      } catch (err) {
+        console.error("Error fetching plans:", err);
+        setError("Failed to fetch plans. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPlans();
+  }, []);
+
+  // ✅ Join Plan (Send student + plan data)
+  const handleJoinPlan = async (plan: any) => {
+    if (!student) {
+      toast.error("Student not found. Please log in again.");
+      return;
+    }
+
+    const orderData = {
+      planName: plan.name,
+      price: plan.price,
+      currency: "NGN",
+      userId: student.id || student._id,
+      fullName: student.fullName,
+      email: student.email,
+      phone: student.phone,
+      address: student.address || "N/A",
+    };
+
+    console.log("📦 Order Data Sent:", orderData);
+
+    setActivating(plan._id);
     try {
-      setLoadingPlanId(planId);
-      await axios.post(
-        `/plans/activate/${planId}`,
-        {},
+      const res = await axios.post(
+        `https://belt-driving-school-backend-3.onrender.com/api/orders/${plan._id}`, // ✅ planId in params
+        orderData,
         {
-          headers: { Authorization: `${localStorage.getItem("token")}` },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
-      toast.success("Plan activated successfully!");
-    } catch (error) {
-      if (isAxiosError(error)) {
-        const apiMessage = error.response?.data?.message;
-        const apiError = error.response?.data?.error;
-        const fallback = error.message || "An unexpected error occurred";
 
-        const errorMsg =
-          `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
-          fallback;
-
-        toast.error(errorMsg);
+      toast.success(`You successfully joined the ${plan.name} plan!`);
+      console.log("✅ Order Success:", res.data);
+    } catch (err) {
+      console.error("Order error:", err);
+      if (isAxiosError(err)) {
+        const msg =
+          err.response?.data?.message ||
+          err.response?.data?.error ||
+          "Failed to join plan. Try again.";
+        toast.error(msg);
+      } else {
+        toast.error("Something went wrong. Try again later.");
       }
     } finally {
-      setLoadingPlanId(null);
+      setActivating(null);
     }
   };
 
+  // ✅ Loading State
+  if (loading) {
+    return (
+      <StudentLayouts>
+        <div className="w-full h-[70vh] flex justify-center items-center">
+          <Loader2 className="w-6 h-6 animate-spin text-gray-500" />
+          <span className="ml-2 text-gray-500">Loading plans...</span>
+        </div>
+      </StudentLayouts>
+    );
+  }
+
+  // ✅ Error State
+  if (error) {
+    return (
+      <StudentLayouts>
+        <div className="text-center text-red-500 py-10">{error}</div>
+      </StudentLayouts>
+    );
+  }
+
+  // ✅ UI
   return (
     <StudentLayouts>
       <Head>
-        <title>Driving School | All Plans</title>
+        <title>All Plans - Belt Driving School</title>
       </Head>
 
-      <div className="min-h-screen bg-gray-50 p-6 md:p-10">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-[#0A2E57] mb-8">
-            Choose Your Driving Plan
-          </h1>
+      <div className="p-6">
+        <h1 className="text-2xl font-bold mb-6 text-gray-800 text-center">
+          Available Training Plans
+        </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {plans.map((plan) => (
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
+          {plans.length > 0 ? (
+            plans.map((plan) => (
               <div
-                key={plan.id}
-                className={`relative border ${plan.color} rounded-2xl p-6 shadow-sm hover:shadow-md transition`}
+                key={plan._id}
+                className={`relative bg-white rounded-2xl shadow-md border ${
+                  plan.highlight
+                    ? "border-green-500 ring-2 ring-green-400"
+                    : "border-gray-100"
+                } p-6 hover:shadow-xl transition-all duration-300`}
               >
-                <h3 className="text-xl font-semibold text-[#0A2E57] mb-2">
-                  {plan.name}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">{plan.description}</p>
+                {plan.highlight && (
+                  <span className="absolute top-3 right-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    Recommended
+                  </span>
+                )}
 
-                <div className="space-y-1 mb-6">
-                  <p className="text-sm text-gray-700">
-                    <strong>Duration:</strong> {plan.duration}
-                  </p>
-                  <p className="text-sm text-gray-700">
-                    <strong>Lessons:</strong> {plan.lessons}
-                  </p>
-                  <p className="text-[#E02828] font-semibold text-lg">
-                    {plan.price}
-                  </p>
-                </div>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+                  {plan.name}
+                </h2>
+                <p className="text-gray-500 mb-2">{plan.duration}</p>
+
+                <p className="text-green-600 text-3xl font-bold mb-3">
+                  ₦{Number(plan.price).toLocaleString()}
+                </p>
+
+                <p className="text-gray-600 text-sm mb-5">
+                  {plan.description || "No description provided."}
+                </p>
+
+                {plan.features && plan.features.length > 0 && (
+                  <ul className="mb-5 space-y-2">
+                    {plan.features.map((feature: string, i: number) => (
+                      <li key={i} className="flex items-center text-gray-700">
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                )}
 
                 <button
-                  onClick={() => handleActivatePlan(plan.id)}
-                  disabled={loadingPlanId === plan.id}
-                  className={`w-full flex items-center justify-center gap-2 py-2 rounded-lg text-white font-medium transition ${
-                    loadingPlanId === plan.id
+                  disabled={activating === plan._id}
+                  onClick={() => handleJoinPlan(plan)}
+                  className={`w-full py-3 rounded-xl font-semibold text-white transition-all duration-300 ${
+                    activating === plan._id
                       ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-[#E02828] hover:bg-red-700"
+                      : "bg-green-600 hover:bg-green-700"
                   }`}
                 >
-                  {loadingPlanId === plan.id ? (
-                    "Activating..."
+                  {activating === plan._id ? (
+                    <span className="flex items-center justify-center">
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Joining...
+                    </span>
                   ) : (
-                    <>
-                      <CheckCircle className="w-4 h-4" /> Activate Plan
-                    </>
+                    "Join Plan"
                   )}
                 </button>
               </div>
-            ))}
-          </div>
-
-          {/* Note / Info Section */}
-          <div className="mt-10 bg-white border border-gray-200 rounded-xl p-6 text-gray-600 text-sm">
-            <p>
-              ⚠️ Once you activate a plan, it becomes your{" "}
-              <strong>Active Plan</strong>. You can view your current plan
-              progress and instructor details in the{" "}
-              <a
-                href="/student/plans/active-plan"
-                className="text-[#E02828] font-medium hover:underline"
-              >
-                Active Plan
-              </a>{" "}
-              page.
-            </p>
-          </div>
+            ))
+          ) : (
+            <div className="col-span-full text-center text-gray-500">
+              No plans available.
+            </div>
+          )}
         </div>
       </div>
     </StudentLayouts>
