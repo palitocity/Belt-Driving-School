@@ -24,14 +24,12 @@ const StudentsList = () => {
 
   const fetchStudents = async () => {
     try {
-
-      
       setLoading(true);
       setError("");
 
       // Replace this with instructor id from context, token, or state
-           const instructorId = localStorage.getItem("user");
-          const id = instructorId ? JSON.parse(instructorId).id : null;
+      const instructorId = localStorage.getItem("user");
+      const id = instructorId ? JSON.parse(instructorId).id : null;
 
       const response = await axios.get(
         `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/${id}/students`,
