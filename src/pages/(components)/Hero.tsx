@@ -9,6 +9,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import car1 from "../../../assets/Insight-One-Car-Per-Student-Banner.png";
 import car2 from "../../../assets/Insight-One-Car-Per-Student-Banner.png";
 import car3 from "../../../assets/Insight-One-Car-Per-Student-Banner.png";
+import { useRouter } from "next/router";
 
 const Hero = () => {
   const slides = [
@@ -20,7 +21,8 @@ const Hero = () => {
       description:
         "Professional driving instruction tailored to your pace. From beginner to advanced, we'll get you road-ready.",
       primaryBtn: "Start Your Journey",
-      secondaryBtn: "View Our Courses",
+
+      path: "/auth/register",
     },
     {
       image: car2,
@@ -30,7 +32,8 @@ const Hero = () => {
       description:
         "Get personalized attention with our one-on-one training approach. Experience the difference quality instruction makes.",
       primaryBtn: "Enroll Today",
-      secondaryBtn: "Learn More",
+
+      path: "/auth/register",
     },
     {
       image: car3,
@@ -40,9 +43,12 @@ const Hero = () => {
       description:
         "Comprehensive training programs designed to help you pass your driving test with confidence on the first try.",
       primaryBtn: "Book a Lesson",
-      secondaryBtn: "See Our Results",
+
+      path: "/book",
     },
   ];
+
+  const router = useRouter();
 
   return (
     <section className="relative w-full md:h-[110vh] h-[160vh]  mt-[90px]">
@@ -112,13 +118,12 @@ const Hero = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delay-2">
-                  <button className="group relative bg-[#E02828] text-white font-bold px-8 py-4 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto">
+                  <button
+                    onClick={() => router.push(slide.path)}
+                    className="group relative bg-[#E02828] text-white font-bold px-8 py-4 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
+                  >
                     <span className="relative z-10">{slide.primaryBtn}</span>
                     <div className="absolute inset-0 bg-[#C02020] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  </button>
-
-                  <button className="bg-white/10 backdrop-blur-sm border-2 border-white text-white font-bold px-8 py-4 rounded-lg hover:bg-white hover:text-[#0A2E57] transition-all duration-300 w-full sm:w-auto">
-                    {slide.secondaryBtn}
                   </button>
                 </div>
 
