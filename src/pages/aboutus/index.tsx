@@ -1,6 +1,18 @@
 import React from "react";
+import {
+  Award,
+  Users,
+  Shield,
+  Target,
+  BookOpen,
+  Car,
+  Clock,
+  UserCheck,
+  CheckCircle,
+  TrendingUp,
+  Heart,
+} from "lucide-react";
 import Homelayouts from "../layouts/Homelayouts";
-import Image from "next/image";
 
 const AboutUs = () => {
   const partners = [
@@ -40,139 +52,319 @@ const AboutUs = () => {
     },
   ];
 
+  const offers = [
+    {
+      icon: BookOpen,
+      title: "Beginner Driving Lessons",
+      desc: "Tailored for new drivers who want to build strong driving foundations.",
+    },
+    {
+      icon: TrendingUp,
+      title: "Refresher Courses",
+      desc: "Perfect for licensed drivers who want to regain confidence or improve specific driving skills.",
+    },
+    {
+      icon: Shield,
+      title: "Defensive Driving Training",
+      desc: "Learn how to anticipate hazards, avoid accidents, and drive responsibly under any condition.",
+    },
+    {
+      icon: CheckCircle,
+      title: "Road Test Preparation",
+      desc: "Focused sessions to help you master test routes, maneuvers, and road rules for exam success.",
+    },
+    {
+      icon: UserCheck,
+      title: "Private & Customized Lessons",
+      desc: "Flexible one-on-one sessions designed around your skill level and schedule.",
+    },
+    {
+      icon: Target,
+      title: "Theory & Traffic Education",
+      desc: "Classroom and online sessions covering traffic laws, road signs, and safety awareness.",
+    },
+  ];
+
+  const reasons = [
+    {
+      icon: Award,
+      title: "Experienced & Certified Instructors",
+      desc: "Our instructors are professionally trained, patient, and certified to deliver high-quality driving lessons that match your learning pace.",
+    },
+    {
+      icon: Car,
+      title: "Modern, Well-Maintained Vehicles",
+      desc: "We use up-to-date vehicles equipped with dual controls and safety features to ensure a smooth and secure learning environment.",
+    },
+    {
+      icon: Clock,
+      title: "Flexible Lesson Schedules",
+      desc: "We offer flexible lesson times — mornings, evenings, and weekends — to fit your busy lifestyle.",
+    },
+    {
+      icon: Target,
+      title: "Comprehensive Training Programs",
+      desc: "From beginner to advanced levels, our courses build confidence through both basic and defensive driving techniques.",
+    },
+    {
+      icon: Heart,
+      title: "Personalized Learning Experience",
+      desc: "Each lesson is tailored to your needs and comfort level to help you progress faster and drive better.",
+    },
+    {
+      icon: Shield,
+      title: "Focus on Road Safety",
+      desc: "We emphasize safe driving habits and awareness — helping you stay safe long after earning your license.",
+    },
+  ];
+
   return (
     <Homelayouts>
-      {/* 🟦 About Intro Section */}
-      <section className="bg-gradient-to-br mt-20 from-blue-50 via-white to-yellow-50 py-20 px-6 lg:px-20">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-extrabold text-blue-900 mb-6">
-            About <span className="text-yellow-500">Belt Driving School</span>
-          </h2>
-          <p className="text-gray-600 text-lg leading-relaxed">
-            At{" "}
-            <span className="font-semibold text-yellow-500">
-              Belt Driving School
-            </span>
-            , we help learners become safe, confident, and responsible drivers.
-            With expert instructors, modern cars, and flexible schedules, our
-            goal is to make your driving journey easy and enjoyable.
-          </p>
-        </div>
-      </section>
+      <div className="bg-white">
+        {/* Hero Section with Diagonal Design */}
+        <section className="relative bg-[#0A2E57] pt-32 pb-24 px-6 lg:px-20 overflow-hidden">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-[#E02828] opacity-10 transform skew-x-12 translate-x-1/4"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#E02828] opacity-5 rounded-full -translate-x-1/2 translate-y-1/2"></div>
 
-      {/* 🟨 Our Partners Section */}
-      <section className="bg-white py-20 px-6 lg:px-20">
-        <h3 className="text-3xl font-bold text-center text-blue-900 mb-12">
-          Our Trusted Partners
-        </h3>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          {partners.map((partner, i) => (
-            <div
-              key={i}
-              className="bg-gray-50 rounded-2xl shadow-md p-6 text-center hover:shadow-lg transition-all duration-300"
-            >
-              <Image
-                src={partner.logo}
-                alt={partner.name}
-                width={24}
-                height={24}
-                className="w-20 h-20 mx-auto rounded-full mb-4 object-cover"
-              />
-              <h4 className="text-xl font-semibold text-blue-800 mb-2">
-                {partner.name}
-              </h4>
-              <p className="text-gray-600 text-sm">{partner.description}</p>
+          <div className="max-w-5xl mx-auto text-center relative z-10">
+            <div className="inline-block mb-4 px-6 py-2 bg-[#E02828] rounded-full">
+              <span className="text-white font-semibold text-sm tracking-wide">
+                WHO WE ARE
+              </span>
             </div>
-          ))}
-        </div>
-      </section>
+            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              About <span className="text-[#E02828]">Belt Driving School</span>
+            </h1>
+            <p className="text-gray-300 text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto">
+              At Belt Driving School, we believe that safe driving starts with
+              proper training, patience, and confidence behind the wheel. Our
+              goal is to turn every student into a responsible, skilled, and
+              confident driver.
+            </p>
 
-      {/* 🟩 Our Team Section */}
-      <section className="bg-gray-50 py-20 px-6 lg:px-20">
-        <h3 className="text-3xl font-bold text-center text-blue-900 mb-12">
-          Meet Our Team
-        </h3>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          {team.map((member, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-2xl shadow-md p-6 text-center hover:-translate-y-2 hover:shadow-lg transition-all duration-300"
-            >
-              <Image
-                src={member.image}
-                alt={member.name}
-                width={24}
-                height={24}
-                className="w-24 h-24 mx-auto rounded-full mb-4 object-cover"
-              />
-              <h4 className="text-lg font-semibold text-blue-900">
-                {member.name}
-              </h4>
-              <p className="text-gray-500 text-sm mb-2">{member.role}</p>
-              <div className="flex justify-center space-x-3">
-                <span className="text-blue-600 hover:text-blue-700 cursor-pointer text-sm">
-                  LinkedIn
-                </span>
-                <span className="text-gray-400">•</span>
-                <span className="text-yellow-500 hover:text-yellow-600 cursor-pointer text-sm">
-                  Message
-                </span>
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 mt-16 max-w-3xl mx-auto">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-[#E02828] mb-2">
+                  2000+
+                </div>
+                <div className="text-gray-300 text-sm">Students Trained</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-[#E02828] mb-2">
+                  98%
+                </div>
+                <div className="text-gray-300 text-sm">Pass Rate</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl font-bold text-[#E02828] mb-2">
+                  15+
+                </div>
+                <div className="text-gray-300 text-sm">Years Experience</div>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* 🟦 Why Choose Us Section */}
-      <section className="bg-white py-20 px-6 lg:px-20">
-        <h3 className="text-3xl font-bold text-center text-blue-900 mb-12">
-          Why Choose Us
-        </h3>
+        {/* What We Offer */}
+        <section className="py-24 px-6 lg:px-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-block mb-4 px-5 py-2 border-2 border-[#E02828] rounded-full">
+                <span className="text-[#E02828] font-semibold text-sm tracking-wide">
+                  OUR SERVICES
+                </span>
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#0A2E57] mb-4">
+                What We Offer
+              </h2>
+              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                Comprehensive training programs designed to meet every
+                driver&lsquo;s needs
+              </p>
+            </div>
 
-        <div className="max-w-4xl mx-auto grid sm:grid-cols-2 gap-10 text-gray-700">
-          <div className="p-6 bg-blue-50 rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
-            <h4 className="text-xl font-bold text-blue-900 mb-2">
-              Certified Instructors
-            </h4>
-            <p>
-              Learn from experienced, certified professionals dedicated to your
-              success.
-            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {offers.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={i}
+                    className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-[#E02828]"
+                  >
+                    <div className="w-14 h-14 bg-[#0A2E57] group-hover:bg-[#E02828] rounded-xl flex items-center justify-center mb-5 transition-all duration-300">
+                      <Icon className="text-white" size={28} />
+                    </div>
+                    <h3 className="text-xl font-bold text-[#0A2E57] mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Us */}
+        <section className="py-24 px-6 lg:px-20 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-block mb-4 px-5 py-2 border-2 border-[#0A2E57] rounded-full">
+                <span className="text-[#0A2E57] font-semibold text-sm tracking-wide">
+                  WHY CHOOSE US
+                </span>
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#0A2E57] mb-4">
+                Your Success is Our Priority
+              </h2>
+              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                Discover what makes Belt Driving School the trusted choice for
+                thousands of students
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {reasons.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={i}
+                    className="group relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#E02828] opacity-0 group-hover:opacity-5 rounded-full -translate-y-1/2 translate-x-1/2 transition-opacity duration-300"></div>
+
+                    <div className="w-12 h-12 bg-[#E02828] bg-opacity-10 rounded-lg flex items-center justify-center mb-5">
+                      <Icon className="text-[#E02828]" size={24} />
+                    </div>
+                    <h3 className="text-lg font-bold text-[#0A2E57] mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed text-sm">
+                      {item.desc}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Our Team */}
+        <section className="py-24 px-6 lg:px-20 bg-[#0A2E57]">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-block mb-4 px-5 py-2 bg-[#E02828] rounded-full">
+                <span className="text-white font-semibold text-sm tracking-wide">
+                  OUR TEAM
+                </span>
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+                Meet Our Expert Instructors
+              </h2>
+              <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+                Dedicated professionals committed to your driving success
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {team.map((member, i) => (
+                <div
+                  key={i}
+                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                >
+                  <div className="relative h-72 bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
+                    <div className="absolute inset-0 bg-[#0A2E57] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                    <div className="absolute top-4 right-4 w-12 h-12 bg-[#E02828] rounded-full flex items-center justify-center">
+                      <Users className="text-white" size={20} />
+                    </div>
+                  </div>
+                  <div className="p-6 text-center">
+                    <h3 className="text-xl font-bold text-[#0A2E57] mb-1">
+                      {member.name}
+                    </h3>
+                    <p className="text-[#E02828] font-semibold text-sm mb-4">
+                      {member.role}
+                    </p>
+                    <div className="flex justify-center gap-4">
+                      <button className="px-4 py-2 bg-[#0A2E57] text-white rounded-lg text-sm font-medium hover:bg-[#E02828] transition-colors duration-300">
+                        View Profile
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Partners */}
+        <section className="py-24 px-6 lg:px-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-block mb-4 px-5 py-2 border-2 border-[#E02828] rounded-full">
+                <span className="text-[#E02828] font-semibold text-sm tracking-wide">
+                  PARTNERSHIPS
+                </span>
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#0A2E57] mb-4">
+                Our Trusted Partners
+              </h2>
+              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                Collaborating with industry leaders to provide you with the best
+                training experience
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {partners.map((partner, i) => (
+                <div
+                  key={i}
+                  className="group bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-[#0A2E57]"
+                >
+                  <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-[#0A2E57] to-[#E02828] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-3xl font-bold text-white">
+                      {partner.name.charAt(0)}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-[#0A2E57] mb-3">
+                    {partner.name}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {partner.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="relative py-24 px-6 lg:px-20 bg-gradient-to-r from-[#0A2E57] to-[#0d3a6e] overflow-hidden">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E02828] rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#E02828] rounded-full blur-3xl"></div>
           </div>
 
-          <div className="p-6 bg-yellow-50 rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
-            <h4 className="text-xl font-bold text-yellow-700 mb-2">
-              Affordable Packages
-            </h4>
-            <p>
-              Choose from flexible and affordable plans that suit your learning
-              goals.
+          <div className="max-w-4xl mx-auto text-center relative z-10">
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+              Ready to Start Your Driving Journey?
+            </h2>
+            <p className="text-gray-300 text-lg mb-10 max-w-2xl mx-auto">
+              Join thousands of satisfied students who chose Belt Driving School
+              for their driver education
             </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <button className="px-8 py-4 bg-[#E02828] text-white rounded-xl font-semibold text-lg hover:bg-red-700 transition-colors duration-300 shadow-lg hover:shadow-xl">
+                Enroll Now
+              </button>
+              <button className="px-8 py-4 bg-white text-[#0A2E57] rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors duration-300 shadow-lg hover:shadow-xl">
+                Contact Us
+              </button>
+            </div>
           </div>
-
-          <div className="p-6 bg-blue-50 rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
-            <h4 className="text-xl font-bold text-blue-900 mb-2">
-              Modern Vehicles
-            </h4>
-            <p>
-              Train with the latest, well-maintained vehicles equipped for
-              safety and comfort.
-            </p>
-          </div>
-
-          <div className="p-6 bg-yellow-50 rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
-            <h4 className="text-xl font-bold text-yellow-700 mb-2">
-              Flexible Schedule
-            </h4>
-            <p>
-              Learn at your own pace with flexible class times that fit your
-              lifestyle.
-            </p>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </Homelayouts>
   );
 };
