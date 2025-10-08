@@ -80,7 +80,16 @@ const LoginForm = () => {
           `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
           fallback;
 
-        toast.error(errorMsg);
+        // ✅ Redirect if email not verified
+        if (
+          errorMsg.toLowerCase().includes("verify your email") ||
+          apiMessage?.toLowerCase().includes("verify your email")
+        ) {
+          toast.error("Please verify your email before logging in.");
+          setTimeout(() => router.push("/auth/verifyemail"), 1000);
+        } else {
+          toast.error(errorMsg);
+        }
       }
     } finally {
       setLoading(false);
