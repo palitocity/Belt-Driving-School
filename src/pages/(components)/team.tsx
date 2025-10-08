@@ -22,7 +22,7 @@ export default function TeamPage() {
     const fetchTeam = async () => {
       try {
         const res = await axios.get(
-          "https://belt-driving-school.vercel.app/api/auth/team/all"
+          "https://belt-driving-school-backend-3.onrender.com/api/auth/team/all"
         );
         setTeam(res.data);
       } catch (error) {

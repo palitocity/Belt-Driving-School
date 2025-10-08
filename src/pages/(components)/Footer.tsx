@@ -165,15 +165,32 @@ const Footer = () => {
             <ul className="space-y-5 text-gray-300">
               <li className="flex items-start gap-3">
                 <span className="text-[#E02828] mt-1 text-xl">📍</span>
-                <span>123 Victoria Island, Lagos, Nigeria</span>
+                <span>No 12 aba-odan alakia Adegbayi Ibadan, oyo state</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-[#E02828] mt-1 text-xl">📍</span>
+                <span>No 2, Shamong Street, Abule-Ijoko, ifo LGA, ogun state..</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-[#E02828] mt-1 text-xl">📍</span>
+                <span>Beside Captain Cook, Brigader ADEMULEGUN ROAD, ONDO WEST  LGA,  ONDO state..</span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-[#E02828] text-xl">📞</span>
                 <a
-                  href="tel:+2348001234567"
+                  href="tel:+23408155904487"
                   className="hover:text-[#E02828] transition-colors duration-200"
                 >
-                  +234 800 123 4567
+                  +234 081 559 04487
+                </a>
+              </li>
+               <li className="flex items-center gap-3">
+                <span className="text-[#E02828] text-xl">📞</span>
+                <a
+                  href="tel:+23408084546863"
+                  className="hover:text-[#E02828] transition-colors duration-200"
+                >
+                  +234 080 845 46863
                 </a>
               </li>
               <li className="flex items-center gap-3">

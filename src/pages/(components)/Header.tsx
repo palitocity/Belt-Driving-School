@@ -95,10 +95,10 @@ const Header = () => {
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-4">
           <a
-            href="tel:+2348001234567"
+            href="tel:+23408084546863"
             className="text-[#E02828] font-semibold text-sm hover:text-white transition"
           >
-            +234 800 123 4567
+            +234 080 845 46863
           </a>
           <button
             onClick={() => router.push("/auth/register")}
