@@ -59,7 +59,7 @@ const ContactUs = () => {
 
         <div className="mt-16 text-center text-gray-600">
           <p>📍 123 Learning Drive, Lagos, Nigeria</p>
-          <p>📞 +234 801 234 5678</p>
+          <p>📞 +234 080 845 46863</p>
           <p>📧 info@drivingschool.com</p>
         </div>
       </div>
