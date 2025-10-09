@@ -1,6 +1,9 @@
+import { useRouter } from "next/router";
 import React from "react";
 
 const Footer = () => {
+  const router = useRouter();
+
   return (
     <footer className="bg-[#002147] text-white min-h-[600px]">
       {/* Main Footer Content */}
@@ -50,20 +53,20 @@ const Footer = () => {
             </h4>
             <ul className="space-y-4">
               <li>
-                <a
-                  href="#"
+                <span
+                  onClick={() => router.push("/aboutus")}
                   className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
                 >
                   About Us
-                </a>
+                </span>
               </li>
               <li>
-                <a
-                  href="#"
+                <span
+                  onClick={() => router.push("/driving")}
                   className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
                 >
-                  Our Courses
-                </a>
+                  Driving License
+                </span>
               </li>
               <li>
                 <a
@@ -73,29 +76,22 @@ const Footer = () => {
                   Why Choose Us
                 </a>
               </li>
+
               <li>
-                <a
-                  href="#"
+                <span
+                  onClick={() => router.push("/book")}
                   className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
                 >
-                  Our Facilities
-                </a>
+                  Book a Meeting
+                </span>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                <span
+                  onClick={() => router.push("/contact")}
                   className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
                 >
                   Contact Us
-                </a>
+                </span>
               </li>
             </ul>
           </div>
@@ -169,11 +165,16 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-[#E02828] mt-1 text-xl">📍</span>
-                <span>No 2, Shamong Street, Abule-Ijoko, ifo LGA, ogun state..</span>
+                <span>
+                  No 2, Shamong Street, Abule-Ijoko, ifo LGA, ogun state..
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-[#E02828] mt-1 text-xl">📍</span>
-                <span>Beside Captain Cook, Brigader ADEMULEGUN ROAD, ONDO WEST  LGA,  ONDO state..</span>
+                <span>
+                  Beside Captain Cook, Brigader ADEMULEGUN ROAD, ONDO WEST LGA,
+                  ONDO state..
+                </span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-[#E02828] text-xl">📞</span>
@@ -184,7 +185,7 @@ const Footer = () => {
                   +234 081 559 04487
                 </a>
               </li>
-               <li className="flex items-center gap-3">
+              <li className="flex items-center gap-3">
                 <span className="text-[#E02828] text-xl">📞</span>
                 <a
                   href="tel:+23408084546863"
