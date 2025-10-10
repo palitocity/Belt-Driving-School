@@ -10,6 +10,7 @@ import {
   Book,
   Ambulance,
   LogOut,
+  Contact,
 } from "lucide-react";
 import { useRouter } from "next/router";
 
@@ -38,11 +39,16 @@ const Sidebar: React.FC<Props> = ({ setSidebarOpen, sidebarOpen }) => {
       icon: <Award className="w-5 h-5" />,
       path: "/admin/instructors",
     },
-    // {
-    //   name: "Training Programs",
-    //   icon: <Car className="w-5 h-5" />,
-    //   path: "/admin/trainingprograms",
-    // },
+    {
+      name: "Bookings",
+      icon: <Book className="w-5 h-5" />,
+      path: "/admin/bookings",
+    },
+    {
+      name: "Contact Us Messages",
+      icon: <Contact className="w-5 h-5" />,
+      path: "/admin/contact",
+    },
     {
       name: "Accidents",
       icon: <Ambulance className="w-5 h-5" />,

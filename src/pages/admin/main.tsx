@@ -9,15 +9,19 @@ import {
   Calendar,
   Bell,
   TrendingUp,
+  MessageSquare,
 } from "lucide-react";
 import axios from "axios";
 
 type Stats = {
+  totalUsers?: number;
+  totalAdmins?: number;
   totalStudents?: number;
   totalInstructors?: number;
-  paidOrders?: number;
   totalOrders?: number;
-  // Add other properties as needed
+  paidOrders?: number;
+  totalContacts?: number;
+  totalConsults?: number;
 };
 
 const Main = () => {
@@ -56,8 +60,8 @@ const Main = () => {
           <div className="bg-white rounded-xl shadow p-5 flex items-center gap-4">
             <Users className="w-10 h-10 text-[#0A2E57]" />
             <div>
-              <h3 className="text-sm text-gray-500">Total Students</h3>
-              <p className="text-xl font-bold">{stats.totalStudents || 0}</p>
+              <h3 className="text-sm text-gray-500">Total Users</h3>
+              <p className="text-xl font-bold">{stats.totalUsers || 0}</p>
             </div>
           </div>
 
@@ -70,9 +74,20 @@ const Main = () => {
           </div>
 
           <div className="bg-white rounded-xl shadow p-5 flex items-center gap-4">
+            <Users className="w-10 h-10 text-[#0A2E57]" />
+            <div>
+              <h3 className="text-sm text-gray-500">Students</h3>
+              <p className="text-xl font-bold">{stats.totalStudents || 0}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* SECOND ROW */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="bg-white rounded-xl shadow p-5 flex items-center gap-4">
             <Car className="w-10 h-10 text-[#0A2E57]" />
             <div>
-              <h3 className="text-sm text-gray-500">Total Order</h3>
+              <h3 className="text-sm text-gray-500">Total Orders</h3>
               <p className="text-xl font-bold">{stats.totalOrders || 0}</p>
             </div>
           </div>
@@ -84,20 +99,30 @@ const Main = () => {
               <p className="text-xl font-bold">₦{stats.paidOrders || 0}</p>
             </div>
           </div>
+
+          <div className="bg-white rounded-xl shadow p-5 flex items-center gap-4">
+            <MessageSquare className="w-10 h-10 text-[#0A2E57]" />
+            <div>
+              <h3 className="text-sm text-gray-500">Contact Messages</h3>
+              <p className="text-xl font-bold">{stats.totalContacts || 0}</p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl shadow p-5 flex items-center gap-4">
+            <Bell className="w-10 h-10 text-[#0A2E57]" />
+            <div>
+              <h3 className="text-sm text-gray-500">Consultations</h3>
+              <p className="text-xl font-bold">{stats.totalConsults || 0}</p>
+            </div>
+          </div>
         </div>
 
-        {/* MIDDLE ROW: SCHEDULE + REVENUE */}
+        {/* CHART + SCHEDULE */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Schedule */}
           <div className="bg-white rounded-xl shadow p-5">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2">
-                <Calendar className="w-5 h-5" /> Upcoming Lessons
-              </h2>
-              <button className="text-sm text-[#0A2E57] hover:underline">
-                View All
-              </button>
-            </div>
+            <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2 mb-4">
+              <Calendar className="w-5 h-5" /> Upcoming Lessons
+            </h2>
             <ul className="space-y-3 text-sm text-gray-600">
               <li className="flex justify-between">
                 <span>John Doe - Basic Driving</span>
@@ -114,57 +139,13 @@ const Main = () => {
             </ul>
           </div>
 
-          {/* Revenue */}
           <div className="bg-white rounded-xl shadow p-5">
             <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2 mb-4">
               <TrendingUp className="w-5 h-5" /> Revenue Overview
             </h2>
-            {/* Placeholder for chart */}
             <div className="h-48 flex items-center justify-center text-gray-400 border border-dashed rounded-lg">
               📊 Revenue Chart Here
             </div>
-          </div>
-        </div>
-
-        {/* BOTTOM ROW: ACTIVITIES + NOTIFICATIONS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Recent Activities */}
-          <div className="bg-white rounded-xl shadow p-5">
-            <h2 className="text-lg font-semibold text-gray-700 mb-4">
-              Recent Activities
-            </h2>
-            <ul className="space-y-3 text-sm text-gray-600">
-              <li>
-                ✅ New student <b>David</b> enrolled in Beginner Course.
-              </li>
-              <li>
-                💳 Payment of ₦50,000 received from <b>Sarah</b>.
-              </li>
-              <li>
-                🚘 Instructor <b>Mr. Ade</b> completed a training session.
-              </li>
-              <li>
-                🎓 License processed for <b>John Doe</b>.
-              </li>
-            </ul>
-          </div>
-
-          {/* Notifications */}
-          <div className="bg-white rounded-xl shadow p-5">
-            <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2 mb-4">
-              <Bell className="w-5 h-5" /> Notifications
-            </h2>
-            <ul className="space-y-3 text-sm text-gray-600">
-              <li className="p-2 bg-yellow-50 border-l-4 border-yellow-400 rounded">
-                ⚠ Student <b>Mike</b> missed yesterday’s class.
-              </li>
-              <li className="p-2 bg-red-50 border-l-4 border-red-400 rounded">
-                ❌ Payment overdue from <b>Anna</b>.
-              </li>
-              <li className="p-2 bg-blue-50 border-l-4 border-blue-400 rounded">
-                📅 License test scheduled for <b>Friday</b>.
-              </li>
-            </ul>
           </div>
         </div>
       </div>

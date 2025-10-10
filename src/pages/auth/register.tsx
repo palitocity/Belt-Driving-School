@@ -8,12 +8,12 @@ import toast from "react-hot-toast";
 
 import { ArrowLeft } from "lucide-react";
 
-const GoBackNav = ({ label = "Back" }: { label?: string }) => {
+const GoBackNav = ({ label = "Go Home" }: { label?: string }) => {
   const router = useRouter();
 
   return (
     <div
-      onClick={() => router.back()}
+      onClick={() => router.push("/")}
       className="flex items-center gap-2 cursor-pointer mb-6 text-[#0A2E57] hover:text-[#E02828] transition font-medium"
     >
       <ArrowLeft size={18} />
