@@ -88,6 +88,7 @@ const Plans = () => {
     }
   };
 
+  
   const handleDeletePlan = async () => {
     // // if (!deleteModal._id) return;
     // setLoading(true);
