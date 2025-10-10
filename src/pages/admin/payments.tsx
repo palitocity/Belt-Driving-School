@@ -1,60 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Adminlayouts from "../layouts/Adminlayouts";
+import axios from "axios";
+import toast from "react-hot-toast";
 import Head from "next/head";
 import { MoreVertical } from "lucide-react";
+interface paymentsData {
+  fullName?: string;
+  email?: string;
+  phone?: string;
+  role?: string;
+  isVerified?: boolean;
+}
 
 const Payments = () => {
-  const payments = [
-    {
-      student: "Michael Lee",
-      program: "Basic Driving",
-      amount: "$200",
-      date: "2025-10-01",
-      status: "Paid",
-    },
-    {
-      student: "Sarah Smith",
-      program: "Advanced Driving",
-      amount: "$350",
-      date: "2025-09-25",
-      status: "Pending",
-    },
-    {
-      student: "John Doe",
-      program: "Defensive Driving",
-      amount: "$250",
-      date: "2025-09-20",
-      status: "Paid",
-    },
-    {
-      student: "Emily Johnson",
-      program: "Basic Driving",
-      amount: "$200",
-      date: "2025-09-15",
-      status: "Overdue",
-    },
-    {
-      student: "David Wilson",
-      program: "Night Driving",
-      amount: "$180",
-      date: "2025-09-10",
-      status: "Paid",
-    },
-    {
-      student: "Sophia Brown",
-      program: "Advanced Driving",
-      amount: "$350",
-      date: "2025-09-05",
-      status: "Paid",
-    },
-    {
-      student: "James Taylor",
-      program: "Motorcycle Training",
-      amount: "$220",
-      date: "2025-08-30",
-      status: "Pending",
-    },
-  ];
+
+const [payments, setPayments] = useState([{}]);
+
+  const [loading, setLoading] = useState(true);
+
+  const getAllPayments = async () => {
+    try {
+      const response = await axios.get(
+        "https://belt-driving-school-backend-3.onrender.com/api/admin/dashboard/payments",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setPayments(response.data);
+      console.log("Payments data:", response.data);
+    } catch (error) {
+      console.error("Error fetching payments:", error);
+      toast.error("Failed to load payments");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getAllPayments();
+  }, []);
 
   return (
     <Adminlayouts>
@@ -68,8 +54,8 @@ const Payments = () => {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-gray-100 text-gray-700">
-                <th className="p-3">Student</th>
-                <th className="p-3">Program</th>
+                <th className="p-3">firstName</th>
+                <th className="p-3">planName</th>
                 <th className="p-3">Amount</th>
                 <th className="p-3">Date</th>
                 <th className="p-3">Status</th>
@@ -79,8 +65,8 @@ const Payments = () => {
             <tbody>
               {payments.map((payment, idx) => (
                 <tr key={idx} className="border-b hover:bg-gray-50 transition">
-                  <td className="p-3">{payment.student}</td>
-                  <td className="p-3">{payment.program}</td>
+                  <td className="p-3">{payment.firstName}</td>
+                  <td className="p-3">{payment.planName}</td>
                   <td className="p-3">{payment.amount}</td>
                   <td className="p-3">{payment.date}</td>
                   <td className="p-3">
