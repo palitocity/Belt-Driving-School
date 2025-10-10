@@ -18,8 +18,7 @@ const Header = () => {
     { name: "Home", path: "/" },
     { name: "About Us", path: "/aboutus" },
     { name: "Driving Training", path: "/driver" },
-    { name: "Driver’s License", path: "/driver" },
-
+    { name: "Driver's License", path: "/driver" },
     { name: "Book a Consult", path: "/book" },
     { name: "Contact Us", path: "/contact" },
   ];
@@ -70,10 +69,10 @@ const Header = () => {
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-4">
           <a
-            href="tel:+23408084546863"
+            href="tel:+2348084546863"
             className="text-[#E02828] font-semibold text-sm hover:text-white transition"
           >
-            +234 080 845 46863
+            📞 +234 808 454 6863
           </a>
           <button
             onClick={() => router.push("/auth/register")}
@@ -109,10 +108,10 @@ const Header = () => {
             {/* CTA section */}
             <div className="pt-4 space-y-2">
               <a
-                href="tel:+2348001234567"
+                href="tel:+2348084546863"
                 className="block text-center bg-[#0A2E57] text-white font-semibold py-2 rounded-md"
               >
-                📞 +234 800 123 4567
+                📞 +234 808 454 6863
               </a>
               <button
                 onClick={() => handleNav("/auth/register")}
