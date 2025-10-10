@@ -1,8 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import axios, { isAxiosError } from "axios";
+import toast from "react-hot-toast";
 
 const Footer: React.FC = () => {
   const router = useRouter();
@@ -13,6 +15,40 @@ const Footer: React.FC = () => {
     { label: "Book a Meeting", path: "/book" },
     { label: "Contact Us", path: "/contact" },
   ];
+
+  const [email, setemail] = useState("");
+  const [loading, setloading] = useState(false);
+
+  const handleNewsletter = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      setloading(true);
+      const res = await axios.post(
+        "https://belt-driving-school-backend-3.onrender.com/api/newsletter/subscribe",
+        {
+          email,
+        }
+      );
+      console.log(res.data);
+      setemail("");
+      toast.success("Subscribed successfully ✅");
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const apiMessage = error.response?.data?.message;
+        const apiError = error.response?.data?.error;
+        const fallback = error.message || "An unexpected error occurred";
+
+        const errorMsg =
+          `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
+          fallback;
+
+        toast.error(errorMsg);
+      }
+    } finally {
+      setloading(false);
+    }
+  };
 
   return (
     <footer className="bg-[#0B1D36] text-gray-300 pt-20 pb-10 relative overflow-hidden">
@@ -126,17 +162,47 @@ const Footer: React.FC = () => {
             <p className="text-sm text-gray-400 mb-4">
               Stay updated with our latest driving programs and discounts.
             </p>
-            <form className="flex items-center gap-2">
+            <form
+              className="flex items-center gap-2"
+              onSubmit={handleNewsletter}
+            >
               <input
                 type="email"
+                onChange={(e) => setemail(e.target.value)}
                 placeholder="Your email address"
                 className="flex-1 px-4 py-3 rounded-md bg-white/10 border border-gray-600 text-gray-200 placeholder-gray-400 focus:outline-none focus:border-[#E02828]"
               />
               <button
                 type="submit"
+                disabled={loading}
                 className="bg-[#E02828] hover:bg-[#c41d1d] text-white font-semibold px-5 py-3 rounded-md transition-all duration-300"
               >
-                Subscribe
+                {loading ? (
+                  <>
+                    <svg
+                      className="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      ></path>
+                    </svg>
+                  </>
+                ) : (
+                  "Subscribe"
+                )}
               </button>
             </form>
           </div>
