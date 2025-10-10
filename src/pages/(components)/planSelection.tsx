@@ -1,71 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
+import axios, { isAxiosError } from "axios";
+import toast from "react-hot-toast";
 
-const plans = [
-  {
-    id: 1,
-    name: "Beginner Driving Course",
-    price: "₦45,000",
-    duration: "2 Weeks",
-    description:
-      "Perfect for first-time learners who want to understand the basics of driving safely and confidently.",
-    features: [
-      "15 practical driving sessions",
-      "Basic traffic rules & safety",
-      "Vehicle control fundamentals",
-      "Intro to road signs and symbols",
-    ],
-    highlight: false,
-  },
-  {
-    id: 2,
-    name: "Intermediate Driving Course",
-    price: "₦65,000",
-    duration: "3 Weeks",
-    description:
-      "Ideal for learners with basic experience who want to enhance driving skills and confidence.",
-    features: [
-      "20 driving sessions",
-      "Advanced turning & parking",
-      "Defensive driving techniques",
-      "Real road test simulation",
-    ],
-    highlight: true,
-  },
-  {
-    id: 3,
-    name: "Advanced Driving Course",
-    price: "₦85,000",
-    duration: "4 Weeks",
-    description:
-      "For experienced drivers looking to master highway driving, night driving, and safety performance.",
-    features: [
-      "25 expert sessions",
-      "Night driving experience",
-      "Emergency handling",
-      "Certificate of completion",
-    ],
-    highlight: false,
-  },
-  {
-    id: 4,
-    name: "Hire a Professional Driver",
-    price: "₦100,000",
-    duration: "1 Month",
-    description:
-      "Hire a certified, professional driver trained by Belt Driving School for your personal or business needs.",
-    features: [
-      "Verified and trained driver",
-      "Flexible duration options",
-      "Background checked",
-      "Available across all states",
-    ],
-    highlight: false,
-  },
-];
+interface Plan {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  duration: string;
+  highlight?: boolean;
+  features: string[];
+}
 
 const PlanSection = () => {
+  const [plans, setPlans] = useState<Plan[]>([]);
+
+  const getAllPlans = async () => {
+    try {
+      const res = await axios.get(
+        "https://belt-driving-school-backend-3.onrender.com/api/auth/plans"
+      );
+      setPlans(res.data as Plan[]);
+      console.log(res.data);
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const apiMessage = error.response?.data?.message;
+        const apiError = error.response?.data?.error;
+        const fallback = error.message || "An unexpected error occurred";
+
+        const errorMsg =
+          `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
+          fallback;
+
+        toast.error(errorMsg);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getAllPlans();
+  }, []);
+
   return (
     <section className="py-20 px-6 bg-[#f8fafc]">
       <div className="max-w-7xl mx-auto text-center mb-12">
@@ -104,7 +81,7 @@ const PlanSection = () => {
                   plan.highlight ? "text-yellow-400" : "text-[#0B2545]"
                 }`}
               >
-                {plan.price}
+                ₦{plan.price}
               </p>
               <p className="text-sm mb-4 opacity-80">
                 Duration: {plan.duration}

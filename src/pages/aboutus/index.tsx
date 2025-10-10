@@ -13,6 +13,7 @@ import {
   Heart,
 } from "lucide-react";
 import Homelayouts from "../layouts/Homelayouts";
+import { useRouter } from "next/router";
 
 const AboutUs = () => {
   const partners = [
@@ -117,6 +118,8 @@ const AboutUs = () => {
       desc: "We emphasize safe driving habits and awareness — helping you stay safe long after earning your license.",
     },
   ];
+
+  const router = useRouter();
 
   return (
     <Homelayouts>
@@ -355,10 +358,16 @@ const AboutUs = () => {
               for their driver education
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button className="px-8 py-4 bg-[#E02828] text-white rounded-xl font-semibold text-lg hover:bg-red-700 transition-colors duration-300 shadow-lg hover:shadow-xl">
+              <button
+                onClick={() => router.push("/auth/register")}
+                className="px-8 py-4 bg-[#E02828] text-white rounded-xl font-semibold text-lg hover:bg-red-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+              >
                 Enroll Now
               </button>
-              <button className="px-8 py-4 bg-white text-[#0A2E57] rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors duration-300 shadow-lg hover:shadow-xl">
+              <button
+                onClick={() => router.push("/contact")}
+                className="px-8 py-4 bg-white text-[#0A2E57] rounded-xl font-semibold text-lg hover:bg-gray-100 transition-colors duration-300 shadow-lg hover:shadow-xl"
+              >
                 Contact Us
               </button>
             </div>

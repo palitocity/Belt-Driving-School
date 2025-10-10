@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
 
   const footerLinks = [
     { label: "About Us", path: "/aboutus" },
-    { label: "Driving License", path: "/driving" },
+    { label: "Driving License", path: "/driver" },
     { label: "Book a Meeting", path: "/book" },
     { label: "Contact Us", path: "/contact" },
   ];
@@ -152,15 +152,12 @@ const Footer: React.FC = () => {
             reserved.
           </p>
           <div className="flex flex-wrap gap-6">
-            <a href="#" className="hover:text-[#E02828] transition">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-[#E02828] transition">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-[#E02828] transition">
-              Cookie Policy
-            </a>
+            <span
+              onClick={() => router.push("/terms")}
+              className="hover:text-[#E02828] transition"
+            >
+              Terms of Service & Privacy Policy
+            </span>
           </div>
         </div>
       </div>
