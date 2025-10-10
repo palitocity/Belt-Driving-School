@@ -6,12 +6,12 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
 
-const GoBackNav = ({ label = "Back" }: { label?: string }) => {
+const GoBackNav = ({ label = "Go Home" }: { label?: string }) => {
   const router = useRouter();
 
   return (
     <div
-      onClick={() => router.back()}
+      onClick={() => router.push("/")} // ✅ Go to homepage
       className="flex items-center gap-2 cursor-pointer mb-6 text-[#0A2E57] hover:text-[#E02828] transition font-medium"
     >
       <ArrowLeft size={18} />
@@ -30,7 +30,6 @@ const LoginForm = () => {
 
   const [loading, setLoading] = useState(false);
 
-  // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -38,7 +37,6 @@ const LoginForm = () => {
     });
   };
 
-  // Handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -52,20 +50,17 @@ const LoginForm = () => {
       if (res.status === 200) {
         const { token, user } = res.data;
 
-        // Save token and user info
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
 
         toast.success("Login successful 🎉");
 
-        // Role-based routing
         setTimeout(() => {
           if (user.role === "admin") {
             router.push("/admin/main");
           } else if (user.role === "instructor") {
             router.push("/instructor/main");
           } else {
-            // Default to student route
             router.push("/student/main");
           }
         }, 1000);
@@ -80,7 +75,6 @@ const LoginForm = () => {
           `${apiMessage || ""}${apiError ? " - " + apiError : ""}`.trim() ||
           fallback;
 
-        // ✅ Redirect if email not verified
         if (
           errorMsg.toLowerCase().includes("verify your email") ||
           apiMessage?.toLowerCase().includes("verify your email")
@@ -104,7 +98,7 @@ const LoginForm = () => {
 
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#0A2E57] via-[#002147] to-[#0A2E57] px-4">
         <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8 border border-gray-200">
-          <GoBackNav label="Go Back" />
+          <GoBackNav label="Go Home" /> {/* ✅ Updated label */}
           <h2 className="text-3xl font-extrabold text-[#0A2E57] mb-2 text-center">
             Welcome Back
           </h2>
@@ -114,9 +108,7 @@ const LoginForm = () => {
               Belt Driving School
             </span>
           </p>
-
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-600 mb-1">
                 Email Address
@@ -132,7 +124,6 @@ const LoginForm = () => {
               />
             </div>
 
-            {/* Password */}
             <div>
               <label className="block text-sm font-medium text-gray-600 mb-1">
                 Password
@@ -156,7 +147,6 @@ const LoginForm = () => {
               </div>
             </div>
 
-            {/* Button */}
             <button
               type="submit"
               disabled={loading}
@@ -165,15 +155,11 @@ const LoginForm = () => {
               {loading ? "Logging in..." : "Login"}
             </button>
           </form>
-
-          {/* Divider */}
           <div className="my-6 flex items-center">
             <div className="flex-grow border-t border-gray-200"></div>
             <span className="px-3 text-xs text-gray-400">OR</span>
             <div className="flex-grow border-t border-gray-200"></div>
           </div>
-
-          {/* Signup link */}
           <p className="text-center text-sm text-gray-500">
             Don’t have an account?{" "}
             <span

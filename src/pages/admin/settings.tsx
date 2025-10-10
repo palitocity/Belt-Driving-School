@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useState } from "react";
@@ -15,24 +16,53 @@ const Settings = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
+    phone: "",
     password: "",
   });
   const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
-  // ✅ Fetch admin data
+  console.log(profile);
+
+  const [admin, setadmin] = useState<any>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        if (parsedUser) {
+          setadmin(parsedUser);
+          console.log("✅ Student loaded:", parsedUser);
+        }
+      } catch (error) {
+        console.error("Error parsing user from localStorage:", error);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (admin?.id) {
+      getAdmin();
+    }
+  }, [admin]);
+
   const getAdmin = async () => {
+    if (!admin?.id) return;
     try {
       const res = await axios.get(
-        "https://belt-driving-school-backend-3.onrender.com/api/admin/dashboard/profile",
+        `https://belt-driving-school-backend-3.onrender.com/api/admin/dashboard/admin/profile/${admin.id}`,
         {
-          headers: { Authorization: `${localStorage.getItem("token")}` },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
-      setProfile(res.data.content.user);
+      setProfile(res.data.admin);
       setFormData({
-        fullName: res.data.content.user.fullName || "",
-        email: res.data.content.user.email || "",
+        fullName: res.data.fullName || "",
+        email: res.data.email || "",
+        phone: res.data.phone || "",
         password: "",
       });
       setPreview(res.data.content.user.profileImage?.url || null);
@@ -42,10 +72,6 @@ const Settings = () => {
       }
     }
   };
-
-  useEffect(() => {
-    getAdmin();
-  }, []);
 
   // ✅ Handle input
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -139,12 +165,12 @@ const Settings = () => {
               </label>
               <input
                 name="fullName"
-                value={formData.fullName}
+                value={formData.fullName || profile?.fullName || ""}
                 onChange={handleChange}
                 className="w-full border rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0A2E57]"
                 type="text"
                 placeholder="Enter your full name"
-                required
+                readOnly={true}
               />
             </div>
 
@@ -154,11 +180,25 @@ const Settings = () => {
               </label>
               <input
                 name="email"
-                value={formData.email}
+                value={formData.email || profile?.email}
                 onChange={handleChange}
                 className="w-full border rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0A2E57]"
                 type="email"
                 placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-600 mb-1">
+                Phone Number
+              </label>
+              <input
+                name="email"
+                value={formData.phone || profile?.phone}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0A2E57]"
+                type="text"
+                placeholder="Enter your phone Number"
                 required
               />
             </div>
