@@ -1,245 +1,166 @@
-import { useRouter } from "next/router";
-import React from "react";
+"use client";
 
-const Footer = () => {
+import React from "react";
+import { useRouter } from "next/router";
+import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+
+const Footer: React.FC = () => {
   const router = useRouter();
 
+  const footerLinks = [
+    { label: "About Us", path: "/aboutus" },
+    { label: "Driving License", path: "/driving" },
+    { label: "Book a Meeting", path: "/book" },
+    { label: "Contact Us", path: "/contact" },
+  ];
+
   return (
-    <footer className="bg-[#002147] text-white min-h-[600px]">
-      {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
+    <footer className="bg-[#0B1D36] text-gray-300 pt-20 pb-10 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#002147]/40 via-transparent to-transparent pointer-events-none" />
+
+      {/* Main Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Company Info */}
+          {/* Column 1 - Brand */}
           <div>
-            <h3 className="text-3xl font-bold text-[#E02828] mb-6">
-              Belt Driving School
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Belt <span className="text-[#E02828]">Driving School</span>
             </h3>
-            <p className="text-gray-300 mb-8 leading-relaxed text-base">
-              Nigeria&lsquo;s premier driving school, committed to producing
-              safe, confident, and skilled drivers since 2009.
+            <p className="text-sm leading-relaxed text-gray-400 mb-8">
+              Nigeria’s premier driving academy since 2009 — empowering safe,
+              confident, and skilled drivers across the nation.
             </p>
             <div className="flex gap-4">
-              <a
-                href="#"
-                className="w-12 h-12 bg-[#0A2E57] rounded-full flex items-center justify-center hover:bg-[#E02828] hover:scale-110 transition-all duration-300"
-              >
-                <span className="font-bold text-lg">f</span>
-              </a>
-              <a
-                href="#"
-                className="w-12 h-12 bg-[#0A2E57] rounded-full flex items-center justify-center hover:bg-[#E02828] hover:scale-110 transition-all duration-300"
-              >
-                <span className="font-bold text-lg">𝕏</span>
-              </a>
-              <a
-                href="#"
-                className="w-12 h-12 bg-[#0A2E57] rounded-full flex items-center justify-center hover:bg-[#E02828] hover:scale-110 transition-all duration-300"
-              >
-                <span className="font-bold text-lg">in</span>
-              </a>
-              <a
-                href="#"
-                className="w-12 h-12 bg-[#0A2E57] rounded-full flex items-center justify-center hover:bg-[#E02828] hover:scale-110 transition-all duration-300"
-              >
-                <span className="font-bold text-lg">IG</span>
-              </a>
+              {[
+                { icon: <Facebook size={18} />, href: "#" },
+                { icon: <Twitter size={18} />, href: "#" },
+                { icon: <Linkedin size={18} />, href: "#" },
+                { icon: <Instagram size={18} />, href: "#" },
+              ].map((social, idx) => (
+                <a
+                  key={idx}
+                  href={social.href}
+                  className="w-10 h-10 rounded-full bg-[#E02828]/10 flex items-center justify-center hover:bg-[#E02828] hover:text-white transition-all duration-300"
+                >
+                  {social.icon}
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Column 2 - Quick Links */}
           <div>
-            <h4 className="text-xl font-bold text-[#E02828] mb-6">
+            <h4 className="text-xl font-semibold text-white mb-6">
               Quick Links
             </h4>
             <ul className="space-y-4">
-              <li>
-                <span
-                  onClick={() => router.push("/aboutus")}
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  About Us
-                </span>
-              </li>
-              <li>
-                <span
-                  onClick={() => router.push("/driving")}
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  Driving License
-                </span>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  Why Choose Us
-                </a>
-              </li>
-
-              <li>
-                <span
-                  onClick={() => router.push("/book")}
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  Book a Meeting
-                </span>
-              </li>
-              <li>
-                <span
-                  onClick={() => router.push("/contact")}
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  Contact Us
-                </span>
-              </li>
+              {footerLinks.map((link, index) => (
+                <li key={index}>
+                  <span
+                    onClick={() => router.push(link.path)}
+                    className="cursor-pointer text-gray-400 hover:text-[#E02828] transition-all duration-200 hover:pl-2 inline-block"
+                  >
+                    {link.label}
+                  </span>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Column 3 - Contact Info */}
           <div>
-            <h4 className="text-xl font-bold text-[#E02828] mb-6">
-              Our Services
-            </h4>
-            <ul className="space-y-4">
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  Beginner Driving Training
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  Driver&lsquo;s License Processing
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  Defensive Driving
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  Advanced Driving Skills
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  Corporate Training
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-[#E02828] hover:pl-2 transition-all duration-200"
-                >
-                  Refresher Courses
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-xl font-bold text-[#E02828] mb-6">
+            <h4 className="text-xl font-semibold text-white mb-6">
               Contact Us
             </h4>
-            <ul className="space-y-5 text-gray-300">
+            <ul className="space-y-5 text-gray-400 text-sm">
               <li className="flex items-start gap-3">
-                <span className="text-[#E02828] mt-1 text-xl">📍</span>
-                <span>No 12 aba-odan alakia Adegbayi Ibadan, oyo state</span>
+                <span className="text-[#E02828]">📍</span>
+                <span>No 12 Aba-Odan, Alakia Adegbayi, Ibadan, Oyo State</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-[#E02828] mt-1 text-xl">📍</span>
+                <span className="text-[#E02828]">📍</span>
                 <span>
-                  No 2, Shamong Street, Abule-Ijoko, ifo LGA, ogun state..
+                  No 2 Shamong Street, Abule-Ijoko, Ifo LGA, Ogun State
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-[#E02828] mt-1 text-xl">📍</span>
+                <span className="text-[#E02828]">📍</span>
                 <span>
-                  Beside Captain Cook, Brigader ADEMULEGUN ROAD, ONDO WEST LGA,
-                  ONDO state..
+                  Beside Captain Cook, Brigadier Ademulegun Rd, Ondo State
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="text-[#E02828] text-xl">📞</span>
-                <a
-                  href="tel:+23408155904487"
-                  className="hover:text-[#E02828] transition-colors duration-200"
-                >
-                  +234 081 559 04487
+                <span className="text-[#E02828]">📞</span>
+                <a href="tel:+2348155904487" className="hover:text-[#E02828]">
+                  +234 815 590 4487
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <span className="text-[#E02828] text-xl">📞</span>
-                <a
-                  href="tel:+23408084546863"
-                  className="hover:text-[#E02828] transition-colors duration-200"
-                >
-                  +234 080 845 46863
+                <span className="text-[#E02828]">📞</span>
+                <a href="tel:+2348084546863" className="hover:text-[#E02828]">
+                  +234 808 454 6863
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <span className="text-[#E02828] text-xl">✉️</span>
+                <span className="text-[#E02828]">✉️</span>
                 <a
                   href="mailto:info@beltdriving.com"
-                  className="hover:text-[#E02828] transition-colors duration-200"
+                  className="hover:text-[#E02828]"
                 >
                   info@beltdriving.com
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <span className="text-[#E02828] text-xl">⏰</span>
+                <span className="text-[#E02828]">⏰</span>
                 <span>Mon - Sat: 8AM - 6PM</span>
               </li>
             </ul>
           </div>
-        </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-[#0A2E57]">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} Belt Driving School. All rights
-              reserved.
+          {/* Column 4 - Newsletter */}
+          <div>
+            <h4 className="text-xl font-semibold text-white mb-6">
+              Join Our Newsletter
+            </h4>
+            <p className="text-sm text-gray-400 mb-4">
+              Stay updated with our latest driving programs and discounts.
             </p>
-            <div className="flex gap-8 text-sm">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-[#E02828] transition-colors duration-200"
+            <form className="flex items-center gap-2">
+              <input
+                type="email"
+                placeholder="Your email address"
+                className="flex-1 px-4 py-3 rounded-md bg-white/10 border border-gray-600 text-gray-200 placeholder-gray-400 focus:outline-none focus:border-[#E02828]"
+              />
+              <button
+                type="submit"
+                className="bg-[#E02828] hover:bg-[#c41d1d] text-white font-semibold px-5 py-3 rounded-md transition-all duration-300"
               >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-[#E02828] transition-colors duration-200"
-              >
-                Terms of Service
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-[#E02828] transition-colors duration-200"
-              >
-                Cookie Policy
-              </a>
-            </div>
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="w-full h-px bg-gray-700 mt-16 mb-8"></div>
+
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400 gap-3">
+          <p>
+            © {new Date().getFullYear()} Belt Driving School. All rights
+            reserved.
+          </p>
+          <div className="flex flex-wrap gap-6">
+            <a href="#" className="hover:text-[#E02828] transition">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-[#E02828] transition">
+              Terms of Service
+            </a>
+            <a href="#" className="hover:text-[#E02828] transition">
+              Cookie Policy
+            </a>
           </div>
         </div>
       </div>
