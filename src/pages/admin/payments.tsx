@@ -4,19 +4,19 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Head from "next/head";
 import { MoreVertical } from "lucide-react";
-interface Payment {
-  firstName?: string;
-  planName?: string;
-  amount?: number | string;
-  date?: string;
-  status?: string;
+interface paymentsData {
+  fullName?: string;
+  email?: string;
+  phone?: string;
+  role?: string;
+  isVerified?: boolean;
 }
 
 const Payments = () => {
-  const [payments, setPayments] = useState<Payment[]>([]);
+
+const [payments, setPayments] = useState([{}]);
 
   const [loading, setLoading] = useState(true);
-  console.log(loading);
 
   const getAllPayments = async () => {
     try {
