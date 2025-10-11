@@ -8,7 +8,7 @@ import Adminlayouts from "../layouts/Adminlayouts";
 import Head from "next/head";
 
 const API_BASE =
-  "https://belt-driving-school-backend-3.onrender.com/api/admin/dashboard/teams";
+  "https://belt-driving-school-backend-3.onrender.com/api/admin/dashboard/team";
 
 interface Team {
   _id?: string;

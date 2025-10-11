@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import logo from "../../../assets/logo.jpg";
+import logo from "../../../assets/logo-removebg-preview.png";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,7 +18,7 @@ const Header = () => {
     { name: "Home", path: "/" },
     { name: "About Us", path: "/aboutus" },
     { name: "Driving Training", path: "/driver" },
-    { name: "Driver's License", path: "/driver" },
+    { name: "Hire a Driver", path: "/hire" },
     { name: "Book a Consult", path: "/book" },
     { name: "Contact Us", path: "/contact" },
   ];
@@ -32,20 +32,20 @@ const Header = () => {
     <header
       className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#0A2E57] shadow-lg h-[80px]"
-          : "bg-[#0A2E57]/95 backdrop-blur-sm h-[90px]"
+          ? "bg-[#0f4077] shadow-lg h-[80px]"
+          : "bg-[#0f4077]/95 backdrop-blur-sm h-[90px]"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
         {/* Logo */}
         <div
-          className="flex items-center cursor-pointer"
+          className="flex w-[50%] md:w-[16%]  h-[90%] justify-center items-center cursor-pointer"
           onClick={() => router.push("/")}
         >
           <Image
             src={logo}
             alt="Belt Driving School Logo"
-            className="h-12 w-auto object-contain"
+            className="h-[80%] w-[80%] object-cover"
           />
         </div>
 
