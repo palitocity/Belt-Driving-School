@@ -10,6 +10,7 @@ import Testimonials from "./Testomony";
 import WhyChooseUs from "./WhyChooseUs";
 import PlanSection from "./planSelection";
 import TeamPage from "./team";
+import ReportAccidentButton from "./report";
 
 const Homepage = () => {
   return (
@@ -41,6 +42,7 @@ const Homepage = () => {
       <section>
         <TeamPage />
       </section>
+      <ReportAccidentButton />
     </Homelayouts>
   );
 };
