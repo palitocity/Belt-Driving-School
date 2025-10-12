@@ -76,7 +76,7 @@ const HeroSlider = () => {
           className="mt-10 flex justify-start"
         >
           <a
-            href="#plans"
+            href="/driver"
             className="bg-white text-gray-900 font-semibold rounded-full flex items-center gap-4 px-6 py-3 hover:bg-[#0f4077] hover:text-white transition duration-300 shadow-lg"
           >
             Learn More
