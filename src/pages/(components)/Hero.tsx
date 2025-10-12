@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 "use client";
 import { FaArrowRight } from "react-icons/fa";
 import image1 from "../../../assets/image1.jpg";
