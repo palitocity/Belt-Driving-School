@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { X, Upload, AlertTriangle } from "lucide-react";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 const ReportAccident = () => {
   const [showModal, setShowModal] = useState(false);
@@ -40,14 +41,14 @@ const ReportAccident = () => {
           setUploading(false);
         } catch (err) {
           console.error("Upload failed:", err);
-          alert("Failed to upload image to server.");
+          toast.error("Failed to upload image to server.");
           setUploading(false);
         }
       };
       reader.readAsDataURL(file);
     } catch (error) {
       console.error("File read error:", error);
-      alert("Error reading file.");
+      toast.error("Error reading file.");
       setUploading(false);
     }
   };
@@ -65,7 +66,7 @@ const ReportAccident = () => {
     e.preventDefault();
 
     if (!evidenceImage) {
-      alert("Please upload an evidence image first.");
+      toast.error("Please upload an evidence image first.");
       return;
     }
 
@@ -81,13 +82,13 @@ const ReportAccident = () => {
         reportData
       );
 
-      alert("Accident report submitted successfully!");
+      toast.success("Accident report submitted successfully!");
       setShowModal(false);
       setFormData({ fullName: "", location: "", description: "" });
       setEvidenceImage(null);
     } catch (error) {
       console.error("Error submitting report:", error);
-      alert("Failed to submit accident report.");
+      toast.error("Failed to submit accident report.");
     } finally {
       setLoading(false);
     }
