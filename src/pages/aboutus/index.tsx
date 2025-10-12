@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Award,
   Users,
@@ -14,6 +14,18 @@ import {
 } from "lucide-react";
 import Homelayouts from "../layouts/Homelayouts";
 import { useRouter } from "next/router";
+import axios from "axios";
+import Image from "next/image";
+
+interface Instructor {
+  _id: string;
+  name: string;
+  fullName?: string;
+  email: string;
+  image?: string;
+  role: string;
+  bio?: string;
+}
 
 const AboutUs = () => {
   const partners = [
@@ -32,24 +44,6 @@ const AboutUs = () => {
       logo: "",
       description:
         "Providing our students with hands-on car maintenance sessions.",
-    },
-  ];
-
-  const team = [
-    {
-      name: "John Ade",
-      role: "Lead Instructor",
-      image: "",
-    },
-    {
-      name: "Mary Bello",
-      role: "Admin & Student Support",
-      image: "",
-    },
-    {
-      name: "Samuel Obi",
-      role: "Driving Coach",
-      image: "",
     },
   ];
 
@@ -120,6 +114,34 @@ const AboutUs = () => {
   ];
 
   const router = useRouter();
+
+  const [team, setTeam] = useState<Instructor[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTeam = async () => {
+      try {
+        const res = await axios.get(
+          "https://belt-driving-school-backend-3.onrender.com/api/auth/team/all"
+        );
+
+        // Sort team so CEO appears first
+        const sortedTeam = res.data.sort((a: Instructor, b: Instructor) => {
+          if (a.role.toLowerCase() === "ceo") return -1;
+          if (b.role.toLowerCase() === "ceo") return 1;
+          return 0;
+        });
+
+        setTeam(sortedTeam);
+      } catch (error) {
+        console.error("Error fetching team:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeam();
+  }, []);
 
   return (
     <Homelayouts>
@@ -269,35 +291,58 @@ const AboutUs = () => {
                 Dedicated professionals committed to your driving success
               </p>
             </div>
+            {loading ? (
+              <p className="text-gray-500">Loading team...</p>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {team.map((member, i) => (
+                  <div
+                    key={i}
+                    className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                  >
+                    <div className="relative h-72 flex flex-col items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+                      {/* Profile Image */}
+                      <div className="w-32 h-32 relative mb-6">
+                        <Image
+                          src={
+                            member.image && member.image.trim() !== ""
+                              ? member.image
+                              : "/images/default-avatar.png"
+                          } // fallback image
+                          alt={member.name || "Instructor"}
+                          width={128}
+                          height={128}
+                          className="rounded-full object-cover border-4 border-white shadow-md w-full h-full"
+                          unoptimized
+                        />
+                      </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {team.map((member, i) => (
-                <div
-                  key={i}
-                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-                >
-                  <div className="relative h-72 bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
-                    <div className="absolute inset-0 bg-[#0A2E57] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    <div className="absolute top-4 right-4 w-12 h-12 bg-[#E02828] rounded-full flex items-center justify-center">
-                      <Users className="text-white" size={20} />
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-[#0A2E57]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                      {/* Top Right Icon */}
+                      <div className="absolute top-4 right-4 w-12 h-12 bg-[#E02828] rounded-full flex items-center justify-center shadow-md">
+                        <Users className="text-white" size={20} />
+                      </div>
+                    </div>
+
+                    <div className="p-6 text-center">
+                      <h3 className="text-xl font-bold text-[#0A2E57] mb-1">
+                        {member.name}
+                      </h3>
+                      <p className="text-[#E02828] font-semibold text-sm mb-4">
+                        {member.role}
+                      </p>
+                      <div className="flex justify-center gap-4">
+                        <button className="px-4 py-2 bg-[#0A2E57] text-white rounded-lg text-sm font-medium hover:bg-[#E02828] transition-colors duration-300">
+                          View Profile
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <div className="p-6 text-center">
-                    <h3 className="text-xl font-bold text-[#0A2E57] mb-1">
-                      {member.name}
-                    </h3>
-                    <p className="text-[#E02828] font-semibold text-sm mb-4">
-                      {member.role}
-                    </p>
-                    <div className="flex justify-center gap-4">
-                      <button className="px-4 py-2 bg-[#0A2E57] text-white rounded-lg text-sm font-medium hover:bg-[#E02828] transition-colors duration-300">
-                        View Profile
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 

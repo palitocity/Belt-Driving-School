@@ -16,6 +16,42 @@ const ReportAccident = () => {
     description: "",
   });
 
+  // Convert and upload image
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+    const file = e.target.files[0];
+
+    setUploading(true);
+    try {
+      // Convert to base64
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Image = reader.result as string;
+
+        try {
+          // Upload the base64 string to backend
+          const res = await axios.post(
+            "https://belt-driving-school-backend-3.onrender.com/api/images/file/upload",
+            { image: base64Image } // backend expects string
+          );
+
+          // Assume backend returns something like { imageUrl: "..." } or { data: "..." }
+          setEvidenceImage(res.data?.imageUrl || res.data?.data || base64Image);
+          setUploading(false);
+        } catch (err) {
+          console.error("Upload failed:", err);
+          alert("Failed to upload image to server.");
+          setUploading(false);
+        }
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error("File read error:", error);
+      alert("Error reading file.");
+      setUploading(false);
+    }
+  };
+
   // Handle input changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -24,47 +60,24 @@ const ReportAccident = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Convert image to base64 when selected
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || e.target.files.length === 0) return;
-
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    setUploading(true);
-
-    reader.onloadend = () => {
-      setEvidenceImage(reader.result as string);
-      setUploading(false);
-    };
-
-    reader.onerror = () => {
-      alert("Failed to read the image file.");
-      setUploading(false);
-    };
-
-    reader.readAsDataURL(file); // convert to base64
-  };
-
-  // Submit the form (send image as base64)
+  // Submit form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!evidenceImage) {
-      alert("Please upload an evidence image before submitting.");
+      alert("Please upload an evidence image first.");
       return;
     }
 
     setLoading(true);
-
     try {
       const reportData = {
         ...formData,
-        evidenceImage, // already base64 string
+        evidenceImage, // already uploaded as base64 or stored URL
       };
 
       await axios.post(
-        "https://belt-driving-school-backend-3.onrender.com/api/report-accident",
+        "https://belt-driving-school-backend-3.onrender.com/api/user/accidents/report",
         reportData
       );
 
@@ -82,7 +95,7 @@ const ReportAccident = () => {
 
   return (
     <>
-      {/* Floating Notification-like Button */}
+      {/* Floating Button */}
       <div
         onClick={() => setShowModal(true)}
         className="fixed bottom-6 right-6 z-50 bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 cursor-pointer transition-all"
@@ -138,9 +151,9 @@ const ReportAccident = () => {
                 <Upload className="w-6 h-6 text-gray-500 mb-1" />
                 <span className="text-sm text-gray-500">
                   {uploading
-                    ? "Converting image..."
+                    ? "Uploading..."
                     : evidenceImage
-                    ? "Image Added ✅"
+                    ? "Image Uploaded ✅"
                     : "Upload Evidence"}
                 </span>
                 <input
