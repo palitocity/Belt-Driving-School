@@ -63,6 +63,19 @@ export default function AdminBookingsPage() {
     getAllBookings();
   }, []);
 
+  const formatDateTime = (isoString: string) => {
+    if (!isoString) return "N/A";
+    const date = new Date(isoString);
+    return date.toLocaleString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
   const updateBookingStatus = async (bookingId: string, newStatus: string) => {
     try {
       await axios.put(
@@ -233,10 +246,7 @@ export default function AdminBookingsPage() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-900">
-                            {booking.date}
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            {booking.time}
+                            {formatDateTime(booking.date)}
                           </div>
                         </td>
 
@@ -282,9 +292,7 @@ export default function AdminBookingsPage() {
                     </p>
                     <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
                       <Calendar className="w-4 h-4" />
-                      <span>
-                        {booking.date} at {booking.time}
-                      </span>
+                      <span>{formatDateTime(booking.date)}</span>
                     </div>
                     <button
                       onClick={() => setSelectedBooking(booking)}
@@ -380,7 +388,7 @@ export default function AdminBookingsPage() {
                     <div>
                       <p className="text-sm text-gray-500">Date & Time</p>
                       <p className="font-medium text-gray-900">
-                        {selectedBooking.date} at {selectedBooking.time}
+                        {formatDateTime(selectedBooking.createdAt)}
                       </p>
                     </div>
                   </div>
@@ -401,7 +409,9 @@ export default function AdminBookingsPage() {
                   </div>
 
                   <div className="text-sm text-gray-500">
-                    <p>Booked on: {selectedBooking.createdAt}</p>
+                    <p>
+                      Booked on: {formatDateTime(selectedBooking.createdAt)}
+                    </p>
                   </div>
                 </div>
 

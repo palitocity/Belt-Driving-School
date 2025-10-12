@@ -304,11 +304,7 @@ const AboutUs = () => {
                       {/* Profile Image */}
                       <div className="w-32 h-32 relative mb-6">
                         <Image
-                          src={
-                            member.image && member.image.trim() !== ""
-                              ? member.image
-                              : "/images/default-avatar.png"
-                          } // fallback image
+                          src={member.image ?? ""}
                           alt={member.name || "Instructor"}
                           width={128}
                           height={128}
