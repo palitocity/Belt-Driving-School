@@ -54,7 +54,7 @@ const HeroSlider = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-blue-950/80 via-blue-950/60 to-transparent"></div>
 
       {/* Content */}
-      <div className="relative z-10 px-6 sm:px-12 md:px-24 max-w-3xl ">
+      <div className="relative z-10 px-8 sm:px-16 md:px-28 max-w-5xl">
         <AnimatePresence mode="wait">
           <motion.h1
             key={heroData[slideIndex].text}
