@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
     try {
       setloading(true);
       const res = await axios.post(
-        "https://belt-driving-school-backend-3.onrender.com/api/newsletter/subscribe",
+        "http://api.beltdrivingschool.com/api/newsletter/subscribe",
         {
           email,
         }
@@ -69,10 +69,22 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex gap-4">
               {[
-                { icon: <Facebook size={18} />, href: "https://facebook.com/beltdrivingschool" },
-                { icon: <Twitter size={18} />, href: "https://x.com/beltdrivingschool" },
-                { icon: <Linkedin size={18} />, href: "https://linkedin.com/beltdrivingschool" },
-                { icon: <Instagram size={18} />, href: "https://www.instagram.com/beltdrivingschool/" },
+                {
+                  icon: <Facebook size={18} />,
+                  href: "https://facebook.com/beltdrivingschool",
+                },
+                {
+                  icon: <Twitter size={18} />,
+                  href: "https://x.com/beltdrivingschool",
+                },
+                {
+                  icon: <Linkedin size={18} />,
+                  href: "https://linkedin.com/beltdrivingschool",
+                },
+                {
+                  icon: <Instagram size={18} />,
+                  href: "https://www.instagram.com/beltdrivingschool/",
+                },
               ].map((social, idx) => (
                 <a
                   key={idx}

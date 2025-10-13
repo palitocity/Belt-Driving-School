@@ -35,7 +35,7 @@ const AllPlans = () => {
     const fetchPlans = async () => {
       try {
         const res = await axios.get(
-          "https://belt-driving-school-backend-3.onrender.com/api/auth/plans"
+          "http://api.beltdrivingschool.com/api/auth/plans"
         );
         setPlans(res.data);
       } catch (err) {
@@ -71,7 +71,7 @@ const AllPlans = () => {
     setActivating(plan._id);
     try {
       const res = await axios.post(
-        `https://belt-driving-school-backend-3.onrender.com/api/orders/${plan._id}`, // ✅ planId in params
+        `http://api.beltdrivingschool.com/api/orders/${plan._id}`, // ✅ planId in params
         orderData,
         {
           headers: {

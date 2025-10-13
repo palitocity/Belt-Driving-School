@@ -49,7 +49,7 @@ const InstructorProfile = () => {
   const getProfile = async () => {
     try {
       const res = await axios.get(
-        `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/profile/${instructorId}`,
+        `http://api.beltdrivingschool.com/api/instructor/dashboard/profile/${instructorId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -75,7 +75,7 @@ const InstructorProfile = () => {
     if (!instructorId) return;
     try {
       const res = await axios.put(
-        `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/profile/${instructorId}`,
+        `http://api.beltdrivingschool.com/api/instructor/dashboard/profile/${instructorId}`,
         formData,
         {
           headers: {

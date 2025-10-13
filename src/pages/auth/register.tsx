@@ -58,7 +58,7 @@ const RegistrationForm = () => {
 
     try {
       const res = await axios.post(
-        "https://belt-driving-school-backend-3.onrender.com/api/auth/register",
+        "http://api.beltdrivingschool.com/api/auth/register",
         {
           fullname: formData.fullname,
           email: formData.email,

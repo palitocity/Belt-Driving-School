@@ -47,7 +47,7 @@ const DriverRequest = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "https://belt-driving-school-backend-3.onrender.com/api/admin/dashboard/drivers-list",
+        "http://api.beltdrivingschool.com/api/admin/dashboard/drivers-list",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -67,14 +67,11 @@ const DriverRequest = () => {
     if (!confirm("Are you sure you want to delete this request?")) return;
 
     try {
-      await axios.delete(
-        `https://belt-driving-school-backend-3.onrender.com/api/hire/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      await axios.delete(`http://api.beltdrivingschool.com/api/hire/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       toast.success("Request deleted successfully");
       getRequests();
     } catch (error) {
@@ -86,7 +83,7 @@ const DriverRequest = () => {
   const updateStatus = async (id: string, status: string) => {
     try {
       await axios.patch(
-        `https://belt-driving-school-backend-3.onrender.com/api/hire/${id}`,
+        `http://api.beltdrivingschool.com/api/hire/${id}`,
         { status },
         {
           headers: {

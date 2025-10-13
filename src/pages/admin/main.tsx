@@ -62,7 +62,7 @@ const Main = () => {
   const getStats = async () => {
     try {
       const response = await axios.get(
-        "https://belt-driving-school-backend-3.onrender.com/api/admin/dashboard/stats",
+        "http://api.beltdrivingschool.com/api/admin/dashboard/stats",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -80,7 +80,7 @@ const Main = () => {
     setLoadingNewsletters(true);
     try {
       const response = await axios.get(
-        "https://belt-driving-school-backend-3.onrender.com/api/newsletter",
+        "http://api.beltdrivingschool.com/api/newsletter",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -99,7 +99,7 @@ const Main = () => {
     setLoadingDriverRequests(true);
     try {
       const response = await axios.get(
-        "https://belt-driving-school-backend-3.onrender.com/api/admin/dashboard/drivers-list",
+        "http://api.beltdrivingschool.com/api/admin/dashboard/drivers-list",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

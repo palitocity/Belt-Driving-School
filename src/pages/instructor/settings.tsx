@@ -30,7 +30,7 @@ const Settings = () => {
   const [formData, setFormData] = useState<InstructorProfile>({});
   const [instructorId, setInstructorId] = useState<string | null>(null);
 
- const getProfile = async () => {
+  const getProfile = async () => {
     const storedId = localStorage.getItem("user");
     const id = storedId ? JSON.parse(storedId).id : null;
     setInstructorId(id);
@@ -38,23 +38,23 @@ const Settings = () => {
       setLoading(false);
       return;
     }
-      try {
-        const res = await axios.get(
-          `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/profile/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        setProfile(res.data);
-        setFormData(res.data);
-      } catch (error) {
-        console.error("Error fetching profile:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    try {
+      const res = await axios.get(
+        `http://api.beltdrivingschool.com/api/instructor/dashboard/profile/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setProfile(res.data);
+      setFormData(res.data);
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     getProfile();
@@ -65,7 +65,7 @@ const Settings = () => {
 
     try {
       const res = await axios.put(
-        `https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard/profile/${instructorId}`,
+        `http://api.beltdrivingschool.com/api/instructor/dashboard/profile/${instructorId}`,
         formData,
         {
           headers: {
