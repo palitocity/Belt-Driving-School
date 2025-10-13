@@ -45,7 +45,7 @@ const Plans = () => {
 
     try {
       const res = await axios.post(
-        "http://api.beltdrivingschool.com/api/admin/dashboard/plans/add",
+        "https://api.beltdrivingschool.com/api/admin/dashboard/plans/add",
         newPlan,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -75,7 +75,7 @@ const Plans = () => {
   const getAllPlans = async () => {
     try {
       const response = await axios.get(
-        "http://api.beltdrivingschool.com/api/admin/dashboard/plans",
+        "https://api.beltdrivingschool.com/api/admin/dashboard/plans",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -96,7 +96,7 @@ const Plans = () => {
 
     try {
       await axios.delete(
-        `http://api.beltdrivingschool.com/api/admin/dashboard/plans/delete/${deleteModal._id}`,
+        `https://api.beltdrivingschool.com/api/admin/dashboard/plans/delete/${deleteModal._id}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }

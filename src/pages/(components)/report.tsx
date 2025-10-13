@@ -32,7 +32,7 @@ const ReportAccident = () => {
         try {
           // Upload the base64 string to backend
           const res = await axios.post(
-            "http://api.beltdrivingschool.com/api/images/file/upload",
+            "https://api.beltdrivingschool.com/api/images/file/upload",
             { image: base64Image } // backend expects string
           );
 
@@ -78,7 +78,7 @@ const ReportAccident = () => {
       };
 
       await axios.post(
-        "http://api.beltdrivingschool.com/api/user/accidents/report",
+        "https://api.beltdrivingschool.com/api/user/accidents/report",
         reportData
       );
 

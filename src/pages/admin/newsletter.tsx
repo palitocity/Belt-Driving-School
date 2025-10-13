@@ -23,7 +23,7 @@ const Newsletter = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://api.beltdrivingschool.com/api/newsletter",
+        "https://api.beltdrivingschool.com/api/newsletter",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

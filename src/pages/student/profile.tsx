@@ -15,7 +15,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        "http://api.beltdrivingschool.com/api/user/activity/dashboard",
+        "https://api.beltdrivingschool.com/api/user/activity/dashboard",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -41,7 +41,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        "http://api.beltdrivingschool.com/api/user/activity/update-profile",
+        "https://api.beltdrivingschool.com/api/user/activity/update-profile",
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },

@@ -47,7 +47,7 @@ const DriverRequest = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://api.beltdrivingschool.com/api/admin/dashboard/drivers-list",
+        "https://api.beltdrivingschool.com/api/admin/dashboard/drivers-list",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -67,7 +67,7 @@ const DriverRequest = () => {
     if (!confirm("Are you sure you want to delete this request?")) return;
 
     try {
-      await axios.delete(`http://api.beltdrivingschool.com/api/hire/${id}`, {
+      await axios.delete(`https://api.beltdrivingschool.com/api/hire/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -83,7 +83,7 @@ const DriverRequest = () => {
   const updateStatus = async (id: string, status: string) => {
     try {
       await axios.patch(
-        `http://api.beltdrivingschool.com/api/hire/${id}`,
+        `https://api.beltdrivingschool.com/api/hire/${id}`,
         { status },
         {
           headers: {

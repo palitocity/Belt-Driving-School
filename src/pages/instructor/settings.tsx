@@ -40,7 +40,7 @@ const Settings = () => {
     }
     try {
       const res = await axios.get(
-        `http://api.beltdrivingschool.com/api/instructor/dashboard/profile/${id}`,
+        `https://api.beltdrivingschool.com/api/instructor/dashboard/profile/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -65,7 +65,7 @@ const Settings = () => {
 
     try {
       const res = await axios.put(
-        `http://api.beltdrivingschool.com/api/instructor/dashboard/profile/${instructorId}`,
+        `https://api.beltdrivingschool.com/api/instructor/dashboard/profile/${instructorId}`,
         formData,
         {
           headers: {

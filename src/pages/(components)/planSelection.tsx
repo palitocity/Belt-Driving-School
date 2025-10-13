@@ -24,7 +24,7 @@ const PlanSection = () => {
   const getAllPlans = async () => {
     try {
       const res = await axios.get(
-        "http://api.beltdrivingschool.com/api/auth/plans"
+        "https://api.beltdrivingschool.com/api/auth/plans"
       );
       setPlans(res.data as Plan[]);
     } catch (error) {
@@ -46,7 +46,7 @@ const PlanSection = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://api.beltdrivingschool.com/api/auth/plan/${planId}`
+        `https://api.beltdrivingschool.com/api/auth/plan/${planId}`
       );
       setSelectedPlan(response.data.plan);
     } catch (error) {

@@ -51,7 +51,7 @@ const Settings = () => {
     if (!admin?.id) return;
     try {
       const res = await axios.get(
-        `http://api.beltdrivingschool.com/api/admin/dashboard/admin/profile/${admin.id}`,
+        `https://api.beltdrivingschool.com/api/admin/dashboard/admin/profile/${admin.id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

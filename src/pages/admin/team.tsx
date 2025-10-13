@@ -7,7 +7,7 @@ import Image from "next/image";
 import Adminlayouts from "../layouts/Adminlayouts";
 import Head from "next/head";
 
-const API_BASE = "http://api.beltdrivingschool.com/api/admin/dashboard/team";
+const API_BASE = "https://api.beltdrivingschool.com/api/admin/dashboard/team";
 
 interface Team {
   _id?: string;
@@ -30,7 +30,7 @@ const TeamPage = () => {
   const getAllTeam = async () => {
     try {
       const res = await axios.get(
-        `http://api.beltdrivingschool.com/api/auth/team/all`
+        `https://api.beltdrivingschool.com/api/auth/team/all`
       );
       setTeams(res.data);
       console.log(teams);
@@ -145,7 +145,7 @@ const TeamPage = () => {
 
       if (editId) {
         await axios.put(
-          `http://api.beltdrivingschool.com/api/admin/dashboard/team/update/${editId}`,
+          `https://api.beltdrivingschool.com/api/admin/dashboard/team/update/${editId}`,
           payload,
           {
             headers: {
@@ -156,7 +156,7 @@ const TeamPage = () => {
         toast.success("Team member updated!");
       } else {
         await axios.post(
-          `http://api.beltdrivingschool.com/api/admin/dashboard/team/add`,
+          `https://api.beltdrivingschool.com/api/admin/dashboard/team/add`,
           payload,
           {
             headers: {

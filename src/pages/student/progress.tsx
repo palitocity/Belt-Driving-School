@@ -11,7 +11,7 @@ const Progress = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        "http://api.beltdrivingschool.com/api/user/activity/progress",
+        "https://api.beltdrivingschool.com/api/user/activity/progress",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
