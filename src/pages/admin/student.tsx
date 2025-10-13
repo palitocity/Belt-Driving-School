@@ -19,7 +19,7 @@ const Student = () => {
   const getAllStudents = async () => {
     try {
       const response = await axios.get(
-        "https://belt-driving-school-backend-3.onrender.com/api/admin/dashboard/students",
+        "http://api.beltdrivingschool.com/api/admin/dashboard/students",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

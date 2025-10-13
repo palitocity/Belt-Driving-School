@@ -21,7 +21,7 @@ export default function TeamPage() {
     const fetchTeam = async () => {
       try {
         const res = await axios.get(
-          "https://belt-driving-school-backend-3.onrender.com/api/auth/team/all"
+          "http://api.beltdrivingschool.com/api/auth/team/all"
         );
 
         // Sort team so CEO appears first

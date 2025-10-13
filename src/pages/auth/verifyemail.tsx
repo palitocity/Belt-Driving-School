@@ -27,7 +27,7 @@ const VerifyEmail = () => {
 
     try {
       const res = await axios.post(
-        "https://belt-driving-school-backend-3.onrender.com/api/auth/confirm-email",
+        "http://api.beltdrivingschool.com/api/auth/confirm-email",
         formData,
         {
           headers: {
@@ -62,7 +62,7 @@ const VerifyEmail = () => {
     setResending(true);
     try {
       const res = await axios.post(
-        "https://belt-driving-school-backend-3.onrender.com/api/auth/resend-confirmation",
+        "http://api.beltdrivingschool.com/api/auth/resend-confirmation",
         {
           email: formData.email,
         },

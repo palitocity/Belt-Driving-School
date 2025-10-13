@@ -38,7 +38,7 @@ const BookConsult = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        "https://belt-driving-school-backend-3.onrender.com/api/consult",
+        "http://api.beltdrivingschool.com/api/consult",
         formData
       );
 

@@ -50,7 +50,7 @@ export default function AdminContactPage() {
     try {
       setLoading(true);
       const res = await axios.get(
-        `https://belt-driving-school-backend-3.onrender.com/api/contact-us/${admin.id}`,
+        `http://api.beltdrivingschool.com/api/contact-us/${admin.id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

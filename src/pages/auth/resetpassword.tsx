@@ -30,7 +30,7 @@ const ResetPassword = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://belt-driving-school-backend-3.onrender.com/api/auth/reset-password",
+        "http://api.beltdrivingschool.com/api/auth/reset-password",
         {
           token,
           newPassword,

@@ -33,7 +33,7 @@ const Main = () => {
   const getStats = async () => {
     try {
       const response = await axios.get(
-        "https://belt-driving-school-backend-3.onrender.com/api/instructor/dashboard",
+        "http://api.beltdrivingschool.com/api/instructor/dashboard",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

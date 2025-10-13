@@ -24,7 +24,7 @@ const PlanSection = () => {
   const getAllPlans = async () => {
     try {
       const res = await axios.get(
-        "https://belt-driving-school-backend-3.onrender.com/api/auth/plans"
+        "http://api.beltdrivingschool.com/api/auth/plans"
       );
       setPlans(res.data as Plan[]);
     } catch (error) {
@@ -46,7 +46,7 @@ const PlanSection = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://belt-driving-school-backend-3.onrender.com/api/auth/plan/${planId}`
+        `http://api.beltdrivingschool.com/api/auth/plan/${planId}`
       );
       setSelectedPlan(response.data.plan);
     } catch (error) {

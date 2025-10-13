@@ -33,7 +33,7 @@ const DriverForm = () => {
 
     try {
       const res = await axios.post(
-        "https://belt-driving-school-backend-3.onrender.com/api/hire",
+        "http://api.beltdrivingschool.com/api/hire",
         formData
       );
 

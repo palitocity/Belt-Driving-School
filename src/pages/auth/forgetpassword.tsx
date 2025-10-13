@@ -26,7 +26,7 @@ const ForgetPassword = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://belt-driving-school-backend-3.onrender.com/api/auth/forgot-password",
+        "http://api.beltdrivingschool.com/api/auth/forgot-password",
         formData
       );
       toast.success(response.data.message || "Password reset link sent!");

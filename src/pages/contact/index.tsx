@@ -29,7 +29,7 @@ const ContactUs = () => {
 
     try {
       const res = await axios.post(
-        "https://belt-driving-school-backend-3.onrender.com/api/contact-us",
+        "http://api.beltdrivingschool.com/api/contact-us",
         {
           fullName: formData.fullName,
           email: formData.email,
