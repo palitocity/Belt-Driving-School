@@ -304,12 +304,11 @@ const AboutUs = () => {
                       {/* Profile Image */}
                       <div className="w-32 h-32 relative mb-6">
                         <Image
-                          src={member.image ?? ""}
+                          src={member.image ?? "/default-avatar.png"}
                           alt={member.name || "Instructor"}
                           width={128}
                           height={128}
                           className="rounded-full object-cover border-4 border-white shadow-md w-full h-full"
-                          unoptimized
                         />
                       </div>
 
