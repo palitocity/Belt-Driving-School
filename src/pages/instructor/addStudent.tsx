@@ -31,7 +31,7 @@ const AddStudent = () => {
       }
 
       const response = await axios.post(
-        "http://api.beltdrivingschool.com/api/instructor/dashboard/assign-student",
+        "https://api.beltdrivingschool.com/api/instructor/dashboard/assign-student",
         { id, email },
         {
           headers: {

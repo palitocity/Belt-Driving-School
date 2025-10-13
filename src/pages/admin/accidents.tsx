@@ -12,7 +12,7 @@ const Accidents = () => {
   const getAllAccidents = async () => {
     try {
       const response = await axios.get(
-        "http://api.beltdrivingschool.com/api/admin/accidents",
+        "https://api.beltdrivingschool.com/api/admin/accidents",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }

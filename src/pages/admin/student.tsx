@@ -19,7 +19,7 @@ const Student = () => {
   const getAllStudents = async () => {
     try {
       const response = await axios.get(
-        "http://api.beltdrivingschool.com/api/admin/dashboard/students",
+        "https://api.beltdrivingschool.com/api/admin/dashboard/students",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -122,7 +122,7 @@ const AboutUs = () => {
     const fetchTeam = async () => {
       try {
         const res = await axios.get(
-          "http://api.beltdrivingschool.com/api/auth/team/all"
+          "https://api.beltdrivingschool.com/api/auth/team/all"
         );
 
         // Sort team so CEO appears first

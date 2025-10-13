@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
     try {
       setloading(true);
       const res = await axios.post(
-        "http://api.beltdrivingschool.com/api/newsletter/subscribe",
+        "https://api.beltdrivingschool.com/api/newsletter/subscribe",
         {
           email,
         }

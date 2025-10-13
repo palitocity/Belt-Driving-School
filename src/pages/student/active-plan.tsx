@@ -39,7 +39,7 @@ const ActivePlan = () => {
       try {
         setLoading(true);
         const res = await axios.get(
-          `http://api.beltdrivingschool.com/api/user/activity/plan/${studentId}`,
+          `https://api.beltdrivingschool.com/api/user/activity/plan/${studentId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

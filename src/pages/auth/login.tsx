@@ -43,7 +43,7 @@ const LoginForm = () => {
 
     try {
       const res = await axios.post(
-        "http://api.beltdrivingschool.com/api/auth/login",
+        "https://api.beltdrivingschool.com/api/auth/login",
         formData
       );
 

@@ -29,7 +29,7 @@ const Payments = () => {
   const getAllPayments = async () => {
     try {
       const response = await axios.get(
-        "http://api.beltdrivingschool.com/api/admin/dashboard/transactions",
+        "https://api.beltdrivingschool.com/api/admin/dashboard/transactions",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

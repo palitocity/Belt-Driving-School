@@ -33,7 +33,7 @@ const DrivingTraining = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        "http://api.beltdrivingschool.com/api/auth/plans"
+        "https://api.beltdrivingschool.com/api/auth/plans"
       );
       setPlans(res.data as Plan[]);
       console.log(res.data);

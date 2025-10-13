@@ -42,7 +42,7 @@ export default function AdminBookingsPage() {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://api.beltdrivingschool.com/api/consult `,
+        `https://api.beltdrivingschool.com/api/consult `,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -79,7 +79,7 @@ export default function AdminBookingsPage() {
   const updateBookingStatus = async (bookingId: string, newStatus: string) => {
     try {
       await axios.put(
-        `http://api.beltdrivingschool.com/api/bookings/${bookingId}`,
+        `https://api.beltdrivingschool.com/api/bookings/${bookingId}`,
         { status: newStatus },
         {
           headers: {
