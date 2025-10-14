@@ -145,16 +145,11 @@ const Footer: React.FC = () => {
                   Beside Captain Cook, Brigadier Ademulegun Rd, Ondo State
                 </span>
               </li>
+             
               <li className="flex items-center gap-3">
                 <span className="text-[#E02828]">📞</span>
-                <a href="tel:+2348155904487" className="hover:text-[#E02828]">
-                  +234 815 590 4487
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-[#E02828]">📞</span>
-                <a href="tel:+2348084546863" className="hover:text-[#E02828]">
-                  +234 808 454 6863
+                <a href="tel:+23407075028171" className="hover:text-[#E02828]">
+                  +234 070 750 28171
                 </a>
               </li>
               <li className="flex items-center gap-3">
