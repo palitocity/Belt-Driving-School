@@ -72,7 +72,7 @@ const Header = () => {
             href="tel:+2348084546863"
             className="text-[#E02828] font-semibold text-sm hover:text-white transition"
           >
-            📞 +234 808 454 6863
+            📞 070708 454 6863
           </a>
           <button
             onClick={() => router.push("/auth/register")}

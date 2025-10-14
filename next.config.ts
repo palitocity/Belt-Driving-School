@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "belt-driving-school-backend-3.onrender.com",
+        hostname: "api.beltdrivingschool.com",
         pathname: "/**",
       },
     ],

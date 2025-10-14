@@ -135,6 +135,12 @@ const Footer: React.FC = () => {
               <li className="flex items-start gap-3">
                 <span className="text-[#E02828]">📍</span>
                 <span>
+                  No 2 Shamong Street, Abule-Ijoko, Ifo LGA, Ogun State
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-[#E02828]">📍</span>
+                <span>
                   Beside Captain Cook, Brigadier Ademulegun Rd, Ondo State
                 </span>
               </li>
