@@ -26,7 +26,7 @@ const Homepage = () => {
           name="keywords"
           content="driving school, driving lessons, Nigeria, car training, defensive driving, driver education, Belt Driving School"
         />
-        <meta name="author" content="Belt Driving School" />
+        <meta name="author" content="https://www.beltdrivingschool.com/" />
 
         {/* Open Graph / Facebook */}
         <meta
@@ -38,7 +38,10 @@ const Homepage = () => {
           content="Join Belt Driving School today to master safe driving skills with our expert instructors and modern vehicles."
         />
         <meta property="og:image" content="/images/og-banner.jpg" />
-        <meta property="og:url" content="https://beltdrivingschool.com" />
+        <meta
+          property="og:url"
+          content="https://beltdrivingschool.com/images/og-home.jpg"
+        />
         <meta property="og:type" content="website" />
 
         {/* Twitter */}
