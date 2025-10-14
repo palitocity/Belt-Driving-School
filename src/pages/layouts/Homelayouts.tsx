@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import Header from "../(components)/Header";
 import PropTypes from "prop-types";
 import Footer from "../(components)/Footer";
+import Head from "next/head";
 
 interface MainlayoutProps {
   children: ReactNode;
@@ -10,6 +11,10 @@ interface MainlayoutProps {
 const Homelayouts: React.FC<MainlayoutProps> = ({ children }) => {
   return (
     <>
+      <Head>
+        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+        <title>Belt Driving School</title>
+      </Head>
       <div className="text">
         <Header />
       </div>

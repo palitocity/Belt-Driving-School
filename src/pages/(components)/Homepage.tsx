@@ -3,6 +3,7 @@ import Homelayouts from "../layouts/Homelayouts";
 import Head from "next/head";
 import Hero from "./Hero";
 import FAQ from "./Faq";
+// import PlanCard from "./PlanCard";
 import FindUs from "./Locateus";
 import Certificates from "./OurCertificate";
 import Testimonials from "./Testomony";
@@ -15,51 +16,8 @@ const Homepage = () => {
   return (
     <Homelayouts>
       <Head>
-        <title>
-          Belt Driving School | Professional Driving Lessons in Nigeria
-        </title>
-        <meta
-          name="description"
-          content="Learn to drive safely and confidently with Belt Driving School. Our certified instructors provide top-quality driving lessons, flexible schedules, and practical training across Nigeria."
-        />
-        <meta
-          name="keywords"
-          content="driving school, driving lessons, Nigeria, car training, defensive driving, driver education, Belt Driving School"
-        />
-        <meta name="author" content="https://www.beltdrivingschool.com/" />
-
-        {/* Open Graph / Facebook */}
-        <meta
-          property="og:title"
-          content="Belt Driving School | Learn to Drive with Confidence"
-        />
-        <meta
-          property="og:description"
-          content="Join Belt Driving School today to master safe driving skills with our expert instructors and modern vehicles."
-        />
-        <meta property="og:image" content="/images/og-banner.jpg" />
-        <meta
-          property="og:url"
-          content="https://beltdrivingschool.com/images/og-home.jpg"
-        />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Belt Driving School | Learn to Drive with Confidence"
-        />
-        <meta
-          name="twitter:description"
-          content="Join Belt Driving School today to master safe driving skills with our expert instructors."
-        />
-        <meta name="twitter:image" content="/images/og-banner.jpg" />
-
-        {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
+        <title>Belt Driving School</title>
       </Head>
-
       <section>
         <Hero />
       </section>
@@ -84,7 +42,6 @@ const Homepage = () => {
       <section>
         <TeamPage />
       </section>
-
       <ReportAccidentButton />
     </Homelayouts>
   );
