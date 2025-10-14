@@ -13,18 +13,14 @@ const Homelayouts: React.FC<MainlayoutProps> = ({ children }) => {
     <>
       <Head>
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
-        <title>Belt Driving School</title>
       </Head>
-      <div className="text">
-        <Header />
-      </div>
-      <div className="w-full h-auto ">{children}</div>
-      <div className="">
-        <Footer />
-      </div>
+      <Header />
+      <main className="w-full h-auto">{children}</main>
+      <Footer />
     </>
   );
 };
+
 Homelayouts.propTypes = {
   children: PropTypes.node,
 };
