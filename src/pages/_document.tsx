@@ -4,6 +4,11 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <meta
+          name="google-site-verification"
+          content="YuIAqhTseeVOYrm3PMvlkh_08wrnbYmSgTjGZkCuHK8"
+        />
+
         {/* Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
