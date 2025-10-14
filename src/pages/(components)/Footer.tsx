@@ -167,7 +167,6 @@ const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
-
           {/* Column 4 - Newsletter */}
           <div>
             <h4 className="text-xl font-semibold text-white mb-6">
